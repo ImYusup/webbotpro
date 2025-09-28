@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ## 🚀 WebBotPro
 
 ✨ WhatsApp Automation, Digital Marketing & Business Intelligence – Built for SMEs and Enterprises  
@@ -52,6 +51,4 @@ Found a bug or have a feature request?
 If you find this project helpful, consider giving it a ⭐ on GitHub!  
 Or, support the creator with a small donation via  
 <a href="https://paypal.me/imyusup" target="_blank" rel="noopener noreferrer">PayPal</a>.
-=======
-# webbotpro
->>>>>>> 1c84187a85af93582099b192a6ee33a58476779f
+
