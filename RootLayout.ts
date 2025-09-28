@@ -1,0 +1,3 @@
+<PaypalLoader>
+  <></>
+</PaypalLoader>

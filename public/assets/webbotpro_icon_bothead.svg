@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <style>
+      .stroke{stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+      .fill{fill:currentColor}
+    </style>
+  </defs>
+  <!-- Antenna -->
+  <circle cx="32" cy="8" r="3" class="fill"/>
+  <path d="M32 11v5" class="stroke"/>
+  <!-- Head -->
+  <rect x="12" y="16" width="40" height="28" rx="10" class="stroke"/>
+  <!-- Eyes -->
+  <circle cx="24" cy="30" r="3" class="fill"/>
+  <circle cx="40" cy="30" r="3" class="fill"/>
+  <!-- W mark (forehead) -->
+  <path d="M22 22l3 6 3-6 3 6 3-6" class="stroke"/>
+  <!-- Base / shoulders -->
+  <path d="M16 46h32" class="stroke"/>
+</svg>
