@@ -6,6 +6,7 @@ import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import CartSidebar from "@/components/CartSidebar";
 import Script from "next/script";
+import PaypalScript from "@/components/PaypalScript";
 
 const geist = Geist({
   subsets: ["latin"],
@@ -40,13 +41,7 @@ export default function RootLayout({
         <main className="flex-1">{children}</main>
         <Footer />
         <CartSidebar /> {/* ✅ Inject cart sidebar di sini */}
-        {/* ✅ Masukin script PayPal di sini */}
-        <Script
-          src={`https://www.paypal.com/sdk/js?client-id=${process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID}&currency=USD&intent=capture`}
-          strategy="afterInteractive"
-          onLoad={() => console.log("✅ PayPal SDK loaded")}
-          onError={(e) => console.error("❌ PayPal SDK failed to load", e)}
-        />
+        <PaypalScript /> {/* ✅ Inject script dari Client Component */}
       </body>
     </html>
   );
