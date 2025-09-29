@@ -1,3 +1,4 @@
+// src/lib/shopify.ts
 export async function shopifyFetch<T>(query: string, variables: Record<string, any> = {}) {
   const response = await fetch(
     `https://${process.env.SHOPIFY_STORE_DOMAIN}/api/2023-07/graphql.json`,
