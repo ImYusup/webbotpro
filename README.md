@@ -1,7 +1,7 @@
 ## 🚀 WebBotPro
 
 ✨ WhatsApp Automation, Digital Marketing & Business Intelligence – Built for SMEs and Enterprises  
-<p align="center"> <a href="https://webbotpro.site" target="_blank">🌐 webbotpro.site</a> </p> <p align="center"> </p>
+<p align="center"> <a href="https://webbotpro.com" target="_blank">🌐 webbotpro.com</a> </p> <p align="center"> </p>
 
 ## 📌 Overview
 
