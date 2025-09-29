@@ -50,8 +50,10 @@ async function getPayPalToken() {
   } catch {
     j = { raw: text };
   }
+
   if (!res.ok) throw new Error(`token fetch failed: ${res.status} ${JSON.stringify(j)}`);
   if (!j?.access_token) throw new Error(`token missing in response: ${JSON.stringify(j)}`);
+
   return { token: j.access_token as string, baseUrl };
 }
 
@@ -59,7 +61,7 @@ export async function POST(req: Request) {
   try {
     const body = await req.json().catch(() => ({}));
 
-    // normalize and validate amount
+    // normalize + validate amount
     let rawAmount: unknown = body?.amount;
     if (typeof rawAmount === "number") rawAmount = String(rawAmount);
     if (!rawAmount || typeof rawAmount !== "string") {
@@ -90,7 +92,10 @@ export async function POST(req: Request) {
 
     const orderRes = await fetch(`${baseUrl}/v2/checkout/orders`, {
       method: "POST",
-      headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify(payload),
     });
 
@@ -106,7 +111,10 @@ export async function POST(req: Request) {
     console.log("DEBUG create-order paypal body", orderJson);
 
     if (!orderRes.ok) {
-      return NextResponse.json({ error: "create-order failed", detail: orderJson }, { status: 502 });
+      return NextResponse.json(
+        { error: "create-order failed", detail: orderJson },
+        { status: 502 }
+      );
     }
 
     const orderID = orderJson?.id || orderJson?.orderID;
@@ -120,6 +128,9 @@ export async function POST(req: Request) {
     return NextResponse.json({ orderID });
   } catch (e: unknown) {
     console.error("create-order error:", errMsg(e));
-    return NextResponse.json({ error: "internal_server_error", message: errMsg(e) }, { status: 500 });
+    return NextResponse.json(
+      { error: "internal_server_error", message: errMsg(e) },
+      { status: 500 }
+    );
   }
 }
