@@ -30,7 +30,13 @@ function errMsg(e: unknown) {
 
 async function getPayPalToken() {
   const { clientId, clientSecret, baseUrl } = getPaypalCredentials();
+
   if (!clientId || !clientSecret) {
+    console.error("❌ Missing PayPal credentials:", {
+      mode: PAYPAL_MODE,
+      clientId: !!clientId,
+      clientSecret: !!clientSecret,
+    });
     throw new Error("Missing PayPal server credentials");
   }
 
