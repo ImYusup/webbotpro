@@ -1,3 +1,4 @@
+// src/app/api/shopify/products/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import { shopifyFetch } from "@/lib/shopify";
 
@@ -24,3 +25,6 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: err.message }, { status: 500 });
   }
 }
+
+// ✅ Required by Next.js App Router
+export default { GET };
