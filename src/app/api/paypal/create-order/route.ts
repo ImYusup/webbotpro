@@ -1,5 +1,6 @@
 // src/app/api/paypal/create-order/route.ts
 import { NextResponse } from "next/server";
+export const runtime = "nodejs";
 
 const PAYPAL_MODE = (process.env.PAYPAL_MODE || "sandbox").toLowerCase();
 
