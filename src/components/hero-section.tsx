@@ -7,9 +7,9 @@ import { motion, AnimatePresence } from "framer-motion"
 import Image from "next/image"
 
 const images = [
-  "/assets/webbotpro.site-1.png",
-  "/assets/webbotpro.site-2.png",
-  "/assets/webbotpro.site-3.png",
+  "/assets/webbotpro.com-1.png",
+  "/assets/webbotpro.com-2.png",
+  "/assets/webbotpro.com-3.png",
 ]
 
 export function HeroSection() {
