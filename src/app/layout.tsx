@@ -34,7 +34,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${geist.variable} ${manrope.variable} antialiased`}>
       <head>
-        <link rel="canonical" href="https://webbotpro.com" />
+        <link rel="canonical" href="https://store.webbotpro.com" />
       </head>
       <body className="font-sans min-h-screen flex flex-col">
         <Header />
