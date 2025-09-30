@@ -22,3 +22,4 @@ export async function GET(req: NextRequest) {
     token: `private_token_for_${id}`,
   });
 }
+
