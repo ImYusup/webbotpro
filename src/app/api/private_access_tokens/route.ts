@@ -9,17 +9,46 @@ export async function GET(req: NextRequest) {
   const auth = req.headers.get("Authorization");
 
   if (!id) {
-    return Response.json({ error: "missing_id" }, { status: 400 });
+    return new Response(JSON.stringify({ error: "missing_id" }), {
+      status: 400,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "Authorization, Content-Type",
+      },
+    });
   }
 
   if (!auth || auth !== `Bearer ${INTERNAL_ACCESS_TOKEN}`) {
-    return Response.json({ error: "unauthorized" }, { status: 401 });
+    return new Response(JSON.stringify({ error: "unauthorized" }), {
+      status: 401,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "Authorization, Content-Type",
+      },
+    });
   }
 
-  return Response.json({
+  return new Response(JSON.stringify({
     ok: true,
     id,
     token: `private_token_for_${id}`,
+  }), {
+    status: 200,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Headers": "Authorization, Content-Type",
+    },
   });
 }
 
+// ✅ Handle preflight CORS request
+export async function OPTIONS() {
+  return new Response(null, {
+    status: 204,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, OPTIONS",
+      "Access-Control-Allow-Headers": "Authorization, Content-Type",
+    },
+  });
+}
