@@ -13,7 +13,6 @@ async function getTokenServerSide() {
   if (!client || !secret) throw new Error("Missing PayPal credentials");
 
   const basic = Buffer.from(`${client}:${secret}`).toString("base64");
-
   const res = await fetch(`${PAYPAL_BASE}/v1/oauth2/token`, {
     method: "POST",
     headers: {
@@ -33,8 +32,7 @@ async function getTokenServerSide() {
 export async function POST(req: Request) {
   try {
     const body = await req.json().catch(() => ({}));
-    const amount = body?.amount || "10.00";
-    const currency = body?.currency || "USD";
+    const amount = body?.amount || "20.00";
 
     const token = await getTokenServerSide();
 
@@ -49,7 +47,7 @@ export async function POST(req: Request) {
         purchase_units: [
           {
             amount: {
-              currency_code: currency,
+              currency_code: "USD",
               value: amount,
             },
           },
@@ -57,20 +55,17 @@ export async function POST(req: Request) {
       }),
     });
 
-    const orderJson = await orderRes.json().catch(() => null);
+    const orderJson = await orderRes.json();
 
     if (!orderRes.ok) {
       return NextResponse.json(
-        { ok: false, error: "paypal create order failed", detail: orderJson },
+        { ok: false, error: "paypal create-order failed", detail: orderJson },
         { status: 502 }
       );
     }
 
-    return NextResponse.json(orderJson);
+    return NextResponse.json({ ok: true, id: orderJson.id, full: orderJson });
   } catch (e: any) {
-    return NextResponse.json(
-      { ok: false, error: String(e) },
-      { status: 500 }
-    );
+    return NextResponse.json({ ok: false, error: String(e) }, { status: 500 });
   }
 }

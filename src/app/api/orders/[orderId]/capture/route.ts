@@ -29,12 +29,13 @@ async function getTokenServerSide() {
   return j.access_token as string;
 }
 
+// ✅ FIX: param harus diambil dari context, bukan argumen kedua langsung
 export async function POST(
   req: Request,
-  { params }: { params: { orderId: string } }
+  context: { params: { orderId: string } }
 ) {
   try {
-    const orderId = params.orderId;
+    const { orderId } = context.params;
     if (!orderId) {
       return NextResponse.json(
         { ok: false, error: "missing orderId" },
