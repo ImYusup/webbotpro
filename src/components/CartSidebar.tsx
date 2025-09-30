@@ -19,22 +19,24 @@ export default function CartSidebar() {
 
             console.log("🛒 Checkout payload:", payload);
 
-            // ✅ Step 1: Fetch private access token
-            const tokenRes = await fetch("/api/private_access_tokens?id=11a6763&checkout_type=c1", {
+            // ✅ Step 1: Fetch private access token (pake runtime config atau hardcode sementara)
+            const tokenRes = await fetch("/api/private_access_tokens?id=70c3ac4", { // Sesuaikan ID
+                method: "GET",
                 headers: {
-                    Authorization: "Bearer dev-test",
+                    Authorization: `Bearer ${process.env.NEXT_PUBLIC_INTERNAL_ACCESS_TOKEN || "dev-test"}`,
                 },
             });
 
             if (!tokenRes.ok) {
-                console.error("❌ Token fetch failed:", tokenRes.status);
+                const errorText = await tokenRes.text();
+                console.error("❌ Token fetch failed:", { status: tokenRes.status, error: errorText });
                 return;
             }
 
             const tokenData = await tokenRes.json();
             console.log("🔐 Token received:", tokenData);
 
-            // ✅ Step 2: Create cart with token (optional: include in payload if needed)
+            // ✅ Step 2: Create cart with token
             const res = await fetch("/api/shopify/create-cart", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -82,14 +84,10 @@ export default function CartSidebar() {
                     <ul className="space-y-3">
                         {items.map((item: CartItem) => (
                             <li key={item.variantId} className="flex gap-3 items-center">
-                                {item.image && (
-                                    <img src={item.image} className="w-12 h-12 object-cover rounded" />
-                                )}
+                                {item.image && <img src={item.image} className="w-12 h-12 object-cover rounded" />}
                                 <div className="flex-1">
                                     <p className="font-semibold">{item.title}</p>
-                                    <p className="text-sm text-gray-600">
-                                        {item.quantity} × ${item.price}
-                                    </p>
+                                    <p className="text-sm text-gray-600">{item.quantity} × ${item.price}</p>
                                 </div>
                                 <button
                                     onClick={() => removeItem(item.variantId)}
