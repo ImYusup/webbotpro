@@ -2,12 +2,8 @@
 import ProductDetail from "./ProductDetail";
 import { getProductData } from "@/lib/shopify";
 
-type Params = { handle: string };
-
-export default async function ProductPage({ params }: { params: Params | Promise<Params> }) {
-  // ✅ handle baik kalau params langsung object atau Promise
-  const resolvedParams = await Promise.resolve(params);
-  const { handle } = resolvedParams;
+export default async function ProductPage({ params }: { params: any }) {
+  const { handle } = await params;
 
   try {
     const product = await getProductData(handle);

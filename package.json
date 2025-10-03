@@ -74,6 +74,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/react-slick": "^0.23.13",
+    "playwright": "^1.55.1",
     "postcss": "^8.5",
     "tailwindcss": "^4.1.9",
     "tw-animate-css": "1.3.3",
@@ -86,5 +87,13 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "✨ WhatsApp Automation, Digital Marketing & Business Intelligence – Built for SMEs and Enterprises  \r <p align=\"center\"> <a href=\"https://webbotpro.com\" target=\"_blank\">🌐 webbotpro.com</a> </p> <p align=\"center\"> </p>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/imyusup/webbotpro.git"
+  },
+  "bugs": {
+    "url": "https://github.com/imyusup/webbotpro/issues"
+  },
+  "homepage": "https://github.com/imyusup/webbotpro#readme"
 }

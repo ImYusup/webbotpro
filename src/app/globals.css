@@ -7,25 +7,33 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: oklch(1 0 0); /* Pure white */
-  --foreground: oklch(0.35 0.01 258); /* Dark gray #4b5563 */
-  --card: oklch(0.98 0.005 258); /* Light gray #f9fafb */
+  --background: oklch(1 0 0);
+  /* Pure white */
+  --foreground: oklch(0.35 0.01 258);
+  /* Dark gray #4b5563 */
+  --card: oklch(0.98 0.005 258);
+  /* Light gray #f9fafb */
   --card-foreground: oklch(0.35 0.01 258);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.35 0.01 258);
-  --primary: oklch(0.55 0.15 200); /* Cyan blue #0891b2 */
+  --primary: oklch(0.55 0.15 200);
+  /* Cyan blue #0891b2 */
   --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.65 0.15 160); /* Growth green #10b981 */
+  --secondary: oklch(0.65 0.15 160);
+  /* Growth green #10b981 */
   --secondary-foreground: oklch(1 0 0);
   --muted: oklch(0.98 0.005 258);
   --muted-foreground: oklch(0.35 0.01 258);
-  --accent: oklch(0.65 0.15 160); /* Accent green */
+  --accent: oklch(0.65 0.15 160);
+  /* Accent green */
   --accent-foreground: oklch(1 0 0);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(1 0 0);
-  --border: oklch(0.92 0.005 258); /* Light border #e2e8f0 */
+  --border: oklch(0.92 0.005 258);
+  /* Light border #e2e8f0 */
   --input: oklch(0.97 0.005 258);
-  --ring: oklch(0.55 0.15 200 / 0.5); /* Cyan focus ring */
+  --ring: oklch(0.55 0.15 200 / 0.5);
+  /* Cyan focus ring */
   --chart-1: oklch(0.55 0.15 200);
   --chart-2: oklch(0.65 0.15 160);
   --chart-3: oklch(0.6 0.15 45);
@@ -51,7 +59,8 @@
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.145 0 0);
   --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.65 0.15 200); /* Brighter cyan for dark mode */
+  --primary: oklch(0.65 0.15 200);
+  /* Brighter cyan for dark mode */
   --primary-foreground: oklch(0.145 0 0);
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
@@ -122,6 +131,15 @@
 }
 
 @layer base {
+  ul {
+    @apply list-disc list-inside mb-4 pl-5;
+  }
+  ol {
+    @apply list-decimal list-inside mb-4 pl-5;
+  }
+  li {
+    @apply mb-2 leading-relaxed;
+  }
   * {
     @apply border-border outline-ring/50;
   }
