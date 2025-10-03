@@ -4,10 +4,8 @@ import { getProductData } from "@/lib/shopify";
 
 type Params = { handle: string };
 
-export default async function ProductPage({ params }: { params: Params | Promise<Params> }) {
-  // ✅ handle baik kalau params langsung object atau Promise
-  const resolvedParams = await Promise.resolve(params);
-  const { handle } = resolvedParams;
+export default async function ProductPage({ params }: { params: Promise<Params> }) {
+  const { handle } = await params; // ✅ di-await sesuai Next.js 15 typing
 
   try {
     const product = await getProductData(handle);
