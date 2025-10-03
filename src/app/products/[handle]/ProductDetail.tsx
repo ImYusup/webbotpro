@@ -1,3 +1,4 @@
+// src/app/products/[handle]/ProductDetail.tsx
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
