@@ -23,6 +23,9 @@ export const metadata: Metadata = {
   title: "WebBotPro - WhatsApp Automation, Digital Marketing & Business Intelligence",
   description:
     "WebBotPro empowers businesses globally with WhatsApp Commerce Automation, Digital Marketing, and Data & Business Intelligence.",
+  icons: {
+    icon: "/favicon.png",
+  },
   keywords: [
     // WhatsApp Automation
     "WhatsApp Commerce Automation",
