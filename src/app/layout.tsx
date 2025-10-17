@@ -20,11 +20,14 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: "WebBotPro - WhatsApp Automation, Digital Marketing & Business Intelligence",
+  title:
+    "WebBotPro - WhatsApp Automation, Digital Marketing & Business Intelligence",
   description:
     "WebBotPro empowers businesses globally with WhatsApp Commerce Automation, Digital Marketing, and Data & Business Intelligence.",
   icons: {
-    icon: "/favicon.png",
+    icon: "/favicon.png", // ✅ favicon resmi
+    shortcut: "/favicon.png", // ✅ untuk browser lama
+    apple: "/favicon.png", // ✅ biar tampil di iOS/Safari
   },
   keywords: [
     // WhatsApp Automation
@@ -93,10 +96,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${geist.variable} ${manrope.variable} antialiased`}>
+    <html
+      lang="en"
+      className={`${geist.variable} ${manrope.variable} antialiased`}
+    >
       <head>
         <link rel="canonical" href="https://webbotpro.com" />
+        {/* ✅ tambahan manual biar favicon pasti muncul */}
+        <link rel="icon" href="/favicon.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/favicon.png" />
       </head>
+
       <body className="font-sans min-h-screen flex flex-col">
         <Header />
         <main className="flex-1">{children}</main>
