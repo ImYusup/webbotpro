@@ -56,17 +56,17 @@ export function Footer() {
             <h3 className="font-bold text-lg mb-4">Services</h3>
             <ul className="space-y-2 text-muted-foreground font-serif">
               <li>
-                <Link href="/products/automation" className="font-bold text-lg hover:text-primary transition-colors">
+                <Link href="/products/category/automation" className="font-bold text-lg hover:text-primary transition-colors">
                   WhatsApp Commerce Automation
                 </Link>
               </li>
               <li>
-                <Link href="/products/websites" className="font-bold text-lg hover:text-primary transition-colors">
+                <Link href="/products/category/websites" className="font-bold text-lg hover:text-primary transition-colors">
                   Digital Presence & Marketing
                 </Link>
               </li>
               <li>
-                <Link href="/products/business-intelligence" className="font-bold text-lg hover:text-primary transition-colors">
+                <Link href="/products/category/business-intelligence" className="font-bold text-lg hover:text-primary transition-colors">
                   Data & Business Intelligence
                 </Link>
               </li>

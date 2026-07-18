@@ -18,6 +18,7 @@ export type Product = {
   description: string;
   images: string[];
   videoUrl?: string;
+  weight?: number; 
   variants?: ProductVariant[];
   features?: string[];
   benefits?: string[];

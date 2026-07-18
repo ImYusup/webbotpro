@@ -107,6 +107,7 @@ export default function ProductDetail({ product }: { product: Product }) {
       quantity,
       image: variantImages?.[0] || product.images?.[0],
       color: selectedVariant?.color,
+      weight: product.weight ?? 0,
     });
 
     setShowCart(true);
@@ -133,8 +134,9 @@ export default function ProductDetail({ product }: { product: Product }) {
         quantity,
         image: variantImages?.[0] || product.images?.[0],
         color: selectedVariant?.color,
+        weight: product.weight ?? 0,
       };
-
+      
       localStorage.setItem(
         `order_${orderId}`,
         JSON.stringify({
