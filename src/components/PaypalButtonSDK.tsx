@@ -106,6 +106,7 @@ export default function PaypalButtonSDK({
 
           onApprove: async (data: any) => {
             const orderID = data?.orderID || data?.id;
+
             if (!orderID) {
               console.error("❌ onApprove missing orderID", data);
               alert("Missing order id after approval.");
@@ -114,12 +115,21 @@ export default function PaypalButtonSDK({
 
             const resp = await fetch("/api/paypal/capture-order", {
               method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ orderID, variantId, quantity, email }),
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                orderID,
+                variantId,
+                quantity,
+                email,
+              }),
             });
 
             const text = await resp.text();
+
             let result: any;
+
             try {
               result = text ? JSON.parse(text) : {};
             } catch {
@@ -134,9 +144,8 @@ export default function PaypalButtonSDK({
               return;
             }
 
-            const shopifyOrderId = result.shopifyOrder?.order?.id;
-            const redirectOrder = shopifyOrderId || orderID;
-            window.location.href = `/order/thank-you?order=${encodeURIComponent(redirectOrder)}`;
+            // Shopify sudah tidak dipakai lagi
+            window.location.href = `/order/thank-you?order=${encodeURIComponent(orderID)}`;
           },
 
           onError: (err: any) => {
