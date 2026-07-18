@@ -5,13 +5,13 @@ import { notFound } from "next/navigation";
 import { products } from "@/data/products";
 
 type Props = {
-  params: Promise<{
+  params: {
     category: string;
-  }>;
+  };
 };
 
 export default async function ProductsCategoryPage({ params }: Props) {
-  const { category } = await params;
+  const { category } = params;
 
   const slugify = (text: string) =>
     text
@@ -76,11 +76,10 @@ export default async function ProductsCategoryPage({ params }: Props) {
                   <Link
                     key={cat}
                     href={`/products/category/${slugify(cat)}`}
-                    className={`rounded-2xl px-6 py-3.5 font-semibold transition ${
-                      slugify(cat) === category
+                    className={`rounded-2xl px-6 py-3.5 font-semibold transition ${slugify(cat) === category
                         ? "bg-teal-600 text-white"
                         : "text-gray-700 hover:bg-gray-100"
-                    }`}
+                      }`}
                   >
                     {cat}
                   </Link>

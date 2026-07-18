@@ -1,4 +1,4 @@
-// src/app/product/[id]/page.tsx
+// src/app/products/[id]/page.tsx
 
 import { notFound } from "next/navigation";
 import { products } from "@/data/products";
