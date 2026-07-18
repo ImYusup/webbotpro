@@ -2,11 +2,14 @@
 import { create } from "zustand";
 
 export type CartItem = {
-  variantId: string;
+  productId: string;
+  variantId?: string;        
   title: string;
   price: number;
   quantity: number;
   image?: string;
+  color?: string;
+  weight: number;
 };
 
 type CartState = {
@@ -14,7 +17,7 @@ type CartState = {
   showCart: boolean;
   setShowCart: (visible: boolean) => void;
   addItem: (item: CartItem) => void;
-  removeItem: (variantId: string) => void;
+  removeItem: (productId: string, variantId?: string) => void; // FIX: PAKE 2 PARAM
   clearCart: () => void;
 };
 
@@ -26,20 +29,30 @@ export const useCart = create<CartState>((set) => ({
 
   addItem: (item: CartItem) =>
     set((state) => {
-      const existing = state.items.find((i) => i.variantId === item.variantId);
-      const updatedItems = existing
-        ? state.items.map((i) =>
-            i.variantId === item.variantId
+      const existing = state.items.find(
+        (i) => i.productId === item.productId && i.variantId === item.variantId
+      );
+
+      if (existing) {
+        return {
+          items: state.items.map((i) =>
+            i.productId === item.productId && i.variantId === item.variantId
               ? { ...i, quantity: i.quantity + item.quantity }
               : i
-          )
-        : [...state.items, item];
-      return { items: updatedItems, showCart: true };
+          ),
+          showCart: true,
+        };
+      }
+
+      return { items: [...state.items, item], showCart: true };
     }),
 
-  removeItem: (variantId: string) =>
+  // FIXED: HAPUS PAKE productId + variantId (bisa undefined)
+  removeItem: (productId: string, variantId?: string) =>
     set((state) => ({
-      items: state.items.filter((i) => i.variantId !== variantId),
+      items: state.items.filter(
+        (i) => !(i.productId === productId && i.variantId === variantId)
+      ),
     })),
 
   clearCart: () => set({ items: [] }),

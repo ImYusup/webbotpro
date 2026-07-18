@@ -7,10 +7,10 @@ export default function PrivacyPage() {
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-gray-100 to-white">
       <section className="py-20 container mx-auto px-4 flex-1">
         <div className="text-center mb-12">
-          <h1 className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-600 mb-4 animate-pulse">
+          <h1 className="text-5xl font-extrabold text-black mb-3">
             Privacy Policy
           </h1>
-          <p className="text-lg text-muted-foreground font-serif italic">
+          <p className="text-xl text-gray-600">
             Protecting your privacy is our priority at WebBotPro
           </p>
         </div>

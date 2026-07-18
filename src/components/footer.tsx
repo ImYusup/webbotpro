@@ -56,22 +56,22 @@ export function Footer() {
             <h3 className="font-bold text-lg mb-4">Services</h3>
             <ul className="space-y-2 text-muted-foreground font-serif">
               <li>
-                <Link href="/pricing/whatsapp" className="font-bold text-lg hover:text-primary transition-colors">
+                <Link href="/products/automation" className="font-bold text-lg hover:text-primary transition-colors">
                   WhatsApp Commerce Automation
                 </Link>
               </li>
               <li>
-                <Link href="/pricing/marketing" className="font-bold text-lg hover:text-primary transition-colors">
+                <Link href="/products/websites" className="font-bold text-lg hover:text-primary transition-colors">
                   Digital Presence & Marketing
                 </Link>
               </li>
               <li>
-                <Link href="/pricing/data" className="font-bold text-lg hover:text-primary transition-colors">
+                <Link href="/products/business-intelligence" className="font-bold text-lg hover:text-primary transition-colors">
                   Data & Business Intelligence
                 </Link>
               </li>
               <li>
-                <Link href="/custom-solutions" className="font-bold text-lg hover:text-primary transition-colors">
+                <Link href="/pricing" className="font-bold text-lg hover:text-primary transition-colors">
                   Custom Solutions
                 </Link>
               </li>
@@ -103,7 +103,7 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <a href="/#contact" className="font-bold text-lg hover:text-primary transition-colors">
+                <a href="/contact" className="font-bold text-lg hover:text-primary transition-colors">
                   Contact
                 </a>
               </li>

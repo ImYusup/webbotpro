@@ -15,7 +15,7 @@ export function CTASection() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <a
-              href="https://wa.me/6281289066999?text=Halo%20WebBotPro%2C%20saya%20tertarik%20untuk%20melihat%20bagaimana%20solusi%20automasi%20dan%20digital%20marketing%20Anda%20dapat%20membantu%20mengembangkan%20bisnis%20saya.%20Bisakah%20Anda%20mengatur%20demo%20untuk%20menjelaskan%20lebih%20lanjut%3F%20Terima%20kasih!"
+              href="https://wa.me/6285975149508?text=Hello%20WebBotPro%2C%20I%20would%20like%20to%20know%20more%20about%20your%20automation%2C%20digital%20marketing%2C%20and%20business%20intelligence%20solutions.%20Could%20you%20share%20more%20details%3F%20Thank%20you!"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -25,9 +25,10 @@ export function CTASection() {
               </Button>
             </a>
             <a
-              href="https://wa.me/6281289066999?text=Halo%20WebBotPro%2C%20saya%20ingin%20tahu%20lebih%20banyak%20tentang%20solusi%20automasi%2C%20digital%20marketing%2C%20dan%20business%20intelligence%20yang%20Anda%20tawarkan.%20Bisakah%20Anda%20berbagi%20informasi%20lebih%20detail%3F%20Terima%20kasih!"
+              href="https://wa.me/6285975149508?text=Hello%20WebBotPro%2C%20I'm%20interested%20in%20seeing%20how%20your%20automation%20and%20digital%20marketing%20solutions%20can%20help%20grow%20my%20business.%20Could%20you%20arrange%20a%20demo%20to%20explain%20further%3F%20Thank%20you!"
               target="_blank"
               rel="noopener noreferrer"
+              className="text-emerald-600 hover:underline font-medium"
             >
               <Button
                 size="lg"

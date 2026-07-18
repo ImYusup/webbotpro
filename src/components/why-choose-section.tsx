@@ -1,3 +1,4 @@
+// src/components/why-choose-section.tsx
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Zap, Award, DollarSign, Puzzle } from "lucide-react"
 
@@ -26,9 +27,9 @@ const reasons = [
 
 export function WhyChooseSection() {
   return (
-    <section id="why-choose" className="py-10 lg:py-16"> {/* Kurangi padding dari py-20/lg:py-32 jadi py-10/lg:py-16 */}
+    <section id="why-choose" className="py-8 lg:py-12 bg-white">   {/* ← Sudah dikurangi */}
       <div className="container mx-auto px-4">
-        <div className="text-center mb-8"> {/* Kurangi mb-16 jadi mb-8 */}
+        <div className="text-center mb-8">
           <h2 className="text-3xl md:text-5xl font-bold mb-4">
             Why Choose
             <span className="text-primary block">WebBotPro?</span>
@@ -38,17 +39,22 @@ export function WhyChooseSection() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-0 why-choose-cards">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {reasons.map((reason, index) => (
-            <Card key={index} className="text-center border-0 shadow-lg hover:shadow-xl transition-shadow">
-              <CardHeader>
-                <div className="mx-auto w-12 h-12 bg-secondary/10 rounded-lg flex items-center justify-center mb-4">
-                  <reason.icon className="h-6 w-6 text-secondary" />
+            <Card 
+              key={index} 
+              className="text-center border-0 shadow-lg hover:shadow-xl transition-all h-full"
+            >
+              <CardHeader className="pb-4">
+                <div className="mx-auto w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mb-5">
+                  <reason.icon className="h-7 w-7 text-primary" />
                 </div>
                 <CardTitle className="text-xl">{reason.title}</CardTitle>
               </CardHeader>
               <CardContent>
-                <CardDescription className="text-base font-serif leading-relaxed">{reason.description}</CardDescription>
+                <CardDescription className="text-base font-serif leading-relaxed">
+                  {reason.description}
+                </CardDescription>
               </CardContent>
             </Card>
           ))}

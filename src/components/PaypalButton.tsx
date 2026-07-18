@@ -1,90 +1,63 @@
 // src/components/PaypalButton.tsx
 "use client";
 
-import { useEffect, useRef } from "react";
+import { PayPalButtons } from "@paypal/react-paypal-js";
 
-type Props = {
-  amount: string;
-  currency?: string;
-  onComplete?: (details: any) => void;
-  className?: string;
-};
+interface PaypalButtonProps {
+  amount: number;
+  orderData: any;
+  onPaid: (order: any) => void;
+}
 
-export default function PaypalButton({ amount, currency = "USD", onComplete, className = "" }: Props) {
-  const containerRef = useRef<HTMLDivElement | null>(null);
-  const hiddenButtonRef = useRef<HTMLButtonElement | null>(null);
-  const renderedRef = useRef(false);
+export default function PaypalButton({ amount, orderData, onPaid }: PaypalButtonProps) {
+  const rate = 10000;
+  const valueUSD = (amount / rate).toFixed(2);
 
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const win = window as any;
-    if (!containerRef.current) return;
-
-    // If SDK not ready yet, retry shortly
-    if (!win.paypal || !win.paypal.Buttons) {
-      const t = setTimeout(() => {
-        if (!renderedRef.current) renderButtons();
-      }, 300);
-      return () => clearTimeout(t);
-    }
-
-    renderButtons();
-
-    function renderButtons() {
-      try {
-        // clear previous render
-        containerRef.current!.innerHTML = "";
-
-        const buttons = win.paypal.Buttons({
-          style: {
-            layout: "horizontal",
-            color: "gold",
-            shape: "rect",
-            label: "paypal",
-            tagline: false,
-          },
-          createOrder: (_data: any, actions: any) => {
-            return actions.order.create({
-              purchase_units: [{ amount: { value: String(amount), currency_code: currency } }],
-            });
-          },
-          onApprove: async (_data: any, actions: any) => {
-            try {
-              if (actions && typeof actions.order?.capture === "function") {
-                const details = await actions.order.capture();
-                if (typeof onComplete === "function") onComplete(details);
-              } else {
-                console.warn("PayPal actions.order.capture not available");
-              }
-            } catch (err) {
-              console.error("PayPal capture error", err);
-            }
-          },
-          onError: (err: any) => {
-            console.error("PayPal Buttons error", err);
-          },
+  return (
+    <PayPalButtons
+      style={{ layout: "vertical", color: "gold", label: "paypal" }}
+      createOrder={(data, actions) => {
+        return actions.order.create({
+          intent: "CAPTURE",
+          purchase_units: [
+            {
+              amount: {
+                currency_code: "USD",
+                value: valueUSD,
+              },
+              description: `Order #${orderData.orderId} - SOLID Store`,
+            },
+          ],
         });
+      }}
+      onApprove={async (data, actions) => {
+        if (!actions.order) return;
 
-        buttons.render(containerRef.current).then(() => {
-          renderedRef.current = true;
-          // find actual SDK button for fallback trigger (if you plan to use a lookalike)
-          const btn = containerRef.current!.querySelector("button");
-          if (btn) {
-            hiddenButtonRef.current = btn as HTMLButtonElement;
-          }
-        });
-      } catch (e) {
-        console.error("Failed to render PayPal Buttons", e);
-      }
-    }
+        const captureDetails = await actions.order.capture();
 
-    return () => {
-      if (containerRef.current) containerRef.current.innerHTML = "";
-      renderedRef.current = false;
-      hiddenButtonRef.current = null;
-    };
-  }, [amount, currency, onComplete]);
+        // Tambahin info PayPal ke order
+        const paidOrder = {
+          ...orderData,
+          paymentMethod: "PayPal",                    // ini yang penting!
+          paypalTransactionId: captureDetails.id,     // buat bukti
+          paidAt: new Date().toISOString(),
+          // Ongkir tetap 0 karena internasional
+          shipping: { cost: 0, method: "International Shipping" },
+        };
 
-  // If you want a custom lookalike that triggers the SDK button, you can render it here and call hiddenButtonRef.current?.click()
-  return <div ref={containerRef} id="paypal-button-container" className={className} />;
+        // Simpen ke localStorage
+        localStorage.setItem("latestOrder", JSON.stringify(paidOrder));
+
+        // Trigger callback biar button CONFIRM ORDER jadi hijau
+        onPaid(paidOrder);
+
+        // LANGSUNG REDIRECT KE ORDER COMPLETE
+        window.location.href = "/order-complete";
+      }}
+      onError={(err) => {
+        console.error("PayPal ERROR:", err);
+        alert("Pembayaran PayPal gagal. Silakan coba lagi atau pilih metode lain.");
+      }}
+    />
+  );
 }
