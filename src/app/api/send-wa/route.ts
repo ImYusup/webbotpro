@@ -42,10 +42,8 @@ export async function POST(req: NextRequest) {
     // =========================
     // LOCAL / INTERNATIONAL DETECTION
     // =========================
-    const isLocal = buyerWA.startsWith("62");
-
-    const templateName = isLocal ? "invoice_order_xx" : "invoice_order_en";
-    const languageCode = "en";   
+    const templateName = "invoice_order_en";
+    const languageCode = "en";
 
     const formatIDR = (val: any) => {
       const num = Number(String(val || 0).replace(/Rp/gi, "").replace(/[^0-9]/g, ""));
@@ -58,36 +56,14 @@ export async function POST(req: NextRequest) {
     // LANGUAGE MESSAGES
     // =========================
 
-    type Lang = "id" | "en";
-
     const MESSAGES = {
-      id: {
-        pdfCaption: (
-          orderId: string,
-          total: number
-        ) =>
-          `✅ Invoice ${orderId} - WebBotPro
-Total: Rp ${total.toLocaleString("id-ID")}
-Terima kasih telah berbelanja di WebBotPro 🙏`,
-
-        failed: (
-          orderId: string,
-          pdfUrl: string
-        ) =>
-          `📄 Invoice ${orderId}
-
-PDF gagal dikirim via WhatsApp.
-Silakan download manual:
-${pdfUrl}`,
-      },
-
       en: {
         pdfCaption: (
           orderId: string,
           total: number
         ) =>
           `✅ Invoice ${orderId} - WebBotPro
-Total: Rp ${total.toLocaleString("en-US")}
+Total: Rp ${total.toLocaleString("id-ID")}
 Thank you for shopping at WebBotPro 🙏`,
 
         failed: (
@@ -97,23 +73,11 @@ Thank you for shopping at WebBotPro 🙏`,
           `📄 Invoice ${orderId}
 
 Failed to send PDF via WhatsApp.
+
 Please download here:
 ${pdfUrl}`,
       },
-    } satisfies Record<
-      Lang,
-      {
-        pdfCaption: (
-          orderId: string,
-          total: number
-        ) => string;
-
-        failed: (
-          orderId: string,
-          pdfUrl: string
-        ) => string;
-      }
-    >;
+    };
 
     // =========================
     // SEND TEXT MESSAGE
@@ -205,7 +169,7 @@ ${pdfUrl}`,
         body: JSON.stringify(payload),
       });
       const result = await res.json();
-      console.log(`BUYER TEMPLATE (${isLocal ? 'LOCAL' : 'INTERNATIONAL'}) RESULT:`, result);
+      console.log("BUYER TEMPLATE RESULT:", result);
       return result;
     };
 
@@ -294,62 +258,32 @@ ${pdfUrl}`,
         );
       }
 
-      const lang: Lang =
-        isLocal
-          ? "id"
-          : "en";
-
-      const sendRes =
-        await fetch(url, {
-          method: "POST",
-
-          headers: {
-            Authorization:
-              `Bearer ${ACCESS_TOKEN}`,
-
-            "Content-Type":
-              "application/json",
+      const sendRes = await fetch(url, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${ACCESS_TOKEN}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          messaging_product: "whatsapp",
+          to: buyerWA,
+          type: "document",
+          document: {
+            id: upload.id,
+            filename: `Invoice_${orderId}.pdf`,
+            caption: MESSAGES.en.pdfCaption(
+              orderId,
+              totalNumber
+            ),
           },
+        }),
+      });
 
-          body:
-            JSON.stringify({
-              messaging_product:
-                "whatsapp",
+      const result = await sendRes.json();
 
-              to:
-                buyerWA,
-
-              type:
-                "document",
-
-              document: {
-                id:
-                  upload.id,
-
-                filename:
-                  `Invoice_${orderId}.pdf`,
-
-                caption:
-                  MESSAGES[
-                    lang
-                  ].pdfCaption(
-                    orderId,
-                    totalNumber
-                  ),
-              },
-            }),
-        });
-
-      const result =
-        await sendRes.json();
-
-      if (
-        !sendRes.ok ||
-        !result.messages
-      ) {
+      if (!sendRes.ok || !result.messages) {
         throw new Error(
-          result?.error
-            ?.message ||
+          result?.error?.message ||
           "SEND_DOCUMENT_FAILED"
         );
       }
@@ -366,18 +300,25 @@ ${pdfUrl}`,
       console.log("📄 PDF REQUEST MODE from button click");
 
       let pdfResult = null;
+
       try {
         pdfResult = await sendPDF();
         console.log("✅ PDF SENT to buyer");
       } catch (err: any) {
         console.error("❌ PDF ERROR:", err);
+
         if (pdfUrl) {
-          const lang: Lang = isLocal ? "id" : "en";
-          await sendTextMessage(buyerWA, MESSAGES[lang].failed(orderId, pdfUrl));
+          await sendTextMessage(
+            buyerWA,
+            MESSAGES.en.failed(orderId, pdfUrl)
+          );
         }
       }
 
-      return NextResponse.json({ success: true, pdfSent: !!pdfResult });
+      return NextResponse.json({
+        success: true,
+        pdfSent: !!pdfResult,
+      });
     }
 
     // =========================
@@ -385,19 +326,37 @@ ${pdfUrl}`,
     // =========================
     console.log("🚀 Starting WA flow - New Order");
 
-    // 1. Admin
+    // 1. Send template ke admin
     console.log("📨 SEND TEMPLATE → ADMIN");
-    await sendAdminTemplate();
+    const adminResult = await sendAdminTemplate();
 
+    if (adminResult.error) {
+      throw new Error(adminResult.error.message);
+    }
+    // 2. Kirim link PDF ke admin
     if (pdfUrl) {
-      await new Promise(r => setTimeout(r, 1000));
-      await sendTextMessage(adminWA, `📎 Invoice Baru\nOrder ID: ${orderId}\n${pdfUrl}`);
+      await new Promise((r) => setTimeout(r, 1000));
+
+      const adminText = await sendTextMessage(
+        adminWA,
+        `📎 Invoice Baru\nOrder ID: ${orderId}\n${pdfUrl}`
+      );
+
+      if (adminText.error) {
+        console.error("ADMIN TEXT ERROR:", adminText.error);
+      }
     }
 
-    // 2. Buyer Template
+    // 3. Send template ke buyer
     console.log("📨 SEND TEMPLATE → BUYER");
-    await new Promise(r => setTimeout(r, 1500));
-    await sendBuyerTemplate();
+
+    await new Promise((r) => setTimeout(r, 1500));
+
+    const buyerResult = await sendBuyerTemplate();
+
+    if (buyerResult.error) {
+      throw new Error(buyerResult.error.message);
+    }
 
     return NextResponse.json({
       success: true,
@@ -406,7 +365,14 @@ ${pdfUrl}`,
 
   } catch (err: any) {
     console.error("SEND WA ERROR:", err);
-    return NextResponse.json({ error: err?.message || "UNKNOWN_ERROR" }, { status: 500 });
-  }
 
+    return NextResponse.json(
+      {
+        error: err?.message || "UNKNOWN_ERROR",
+      },
+      {
+        status: 500,
+      }
+    );
+  }
 }
