@@ -5,13 +5,13 @@ import { notFound } from "next/navigation";
 import { products } from "@/data/products";
 
 type Props = {
-  params: {
+  params: Promise<{
     category: string;
-  };
+  }>;
 };
 
 export default async function ProductsCategoryPage({ params }: Props) {
-  const { category } = params;
+  const { category } = await params;
 
   const slugify = (text: string) =>
     text
