@@ -39,10 +39,18 @@ export async function POST(req: NextRequest) {
     const adminWA = normalizePhone(adminPhone);
     const waForLink = normalizePhone(wa || buyerPhone);
 
+    // DEBUG
+    console.log("================================");
+    console.log("PHONE_NUMBER_ID :", PHONE_NUMBER_ID);
+    console.log("BUYER WA        :", buyerWA);
+    console.log("ADMIN WA        :", adminWA);
+    console.log("GRAPH URL       :", url);
+    console.log("================================");
+
     // =========================
     // LOCAL / INTERNATIONAL DETECTION
     // =========================
-    const templateName = "invoice_order_en";
+    const templateName = "buyer_order";
     const languageCode = "en";
 
     const formatIDR = (val: any) => {
@@ -87,16 +95,29 @@ ${pdfUrl}`,
         messaging_product: "whatsapp",
         to,
         type: "text",
-        text: { body: message },
+        text: {
+          body: message,
+        },
       };
+
+      console.log("========== TEXT ==========");
+      console.log(JSON.stringify(payload, null, 2));
+
       const res = await fetch(url, {
         method: "POST",
-        headers: { Authorization: `Bearer ${ACCESS_TOKEN}`, "Content-Type": "application/json" },
+        headers: {
+          Authorization: `Bearer ${ACCESS_TOKEN}`,
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify(payload),
       });
-      const result = await res.json();
-      console.log("TEXT RESULT:", result);
-      return result;
+
+      const raw = await res.text();
+
+      console.log("HTTP:", res.status);
+      console.log(raw);
+
+      return JSON.parse(raw);
     };
 
     // =========================
@@ -108,32 +129,46 @@ ${pdfUrl}`,
         to: adminWA,
         type: "template",
         template: {
-          name: "admin_new_order",
-          language: { code: "en" },
-          components: [{
-            type: "body",
-            parameters: [
-              { type: "text", text: orderId },
-              { type: "text", text: orderDate },
-              { type: "text", text: customer },
-              { type: "text", text: product },
-              { type: "text", text: totalNumber.toLocaleString("id-ID") },
-              { type: "text", text: address },
-              { type: "text", text: status },
-              { type: "text", text: waForLink },
-            ]
-          }]
-        }
+          name: "admin_order",
+          language: {
+            code: "en",
+          },
+          components: [
+            {
+              type: "body",
+              parameters: [
+                { type: "text", text: orderId },
+                { type: "text", text: orderDate },
+                { type: "text", text: customer },
+                { type: "text", text: product },
+                { type: "text", text: totalNumber.toLocaleString("id-ID") },
+                { type: "text", text: address },
+                { type: "text", text: status },
+                { type: "text", text: waForLink },
+              ],
+            },
+          ],
+        },
       };
+
+      console.log("========== ADMIN TEMPLATE ==========");
+      console.log(JSON.stringify(payload, null, 2));
 
       const res = await fetch(url, {
         method: "POST",
-        headers: { Authorization: `Bearer ${ACCESS_TOKEN}`, "Content-Type": "application/json" },
+        headers: {
+          Authorization: `Bearer ${ACCESS_TOKEN}`,
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify(payload),
       });
-      const result = await res.json();
-      console.log("ADMIN TEMPLATE RESULT:", result);
-      return result;
+
+      const raw = await res.text();
+
+      console.log("HTTP:", res.status);
+      console.log(raw);
+
+      return JSON.parse(raw);
     };
 
     // =========================
@@ -146,31 +181,45 @@ ${pdfUrl}`,
         type: "template",
         template: {
           name: templateName,
-          language: { code: languageCode },
-          components: [{
-            type: "body",
-            parameters: [
-              { type: "text", text: customer },
-              { type: "text", text: orderId },
-              { type: "text", text: orderDate },
-              { type: "text", text: customer },
-              { type: "text", text: product },
-              { type: "text", text: totalNumber.toLocaleString("id-ID") },
-              { type: "text", text: address },
-              { type: "text", text: status },
-            ]
-          }]
-        }
+          language: {
+            code: languageCode,
+          },
+          components: [
+            {
+              type: "body",
+              parameters: [
+                { type: "text", text: customer },
+                { type: "text", text: orderId },
+                { type: "text", text: orderDate },
+                { type: "text", text: customer },
+                { type: "text", text: product },
+                { type: "text", text: totalNumber.toLocaleString("id-ID") },
+                { type: "text", text: address },
+                { type: "text", text: status },
+              ],
+            },
+          ],
+        },
       };
+
+      console.log("========== BUYER TEMPLATE ==========");
+      console.log(JSON.stringify(payload, null, 2));
 
       const res = await fetch(url, {
         method: "POST",
-        headers: { Authorization: `Bearer ${ACCESS_TOKEN}`, "Content-Type": "application/json" },
+        headers: {
+          Authorization: `Bearer ${ACCESS_TOKEN}`,
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify(payload),
       });
-      const result = await res.json();
-      console.log("BUYER TEMPLATE RESULT:", result);
-      return result;
+
+      const raw = await res.text();
+
+      console.log("HTTP:", res.status);
+      console.log(raw);
+
+      return JSON.parse(raw);
     };
 
     // =========================
@@ -329,6 +378,7 @@ ${pdfUrl}`,
     // 1. Send template ke admin
     console.log("📨 SEND TEMPLATE → ADMIN");
     const adminResult = await sendAdminTemplate();
+    console.log("ADMIN TEMPLATE RESULT:", adminResult);
 
     if (adminResult.error) {
       throw new Error(adminResult.error.message);
@@ -353,6 +403,7 @@ ${pdfUrl}`,
     await new Promise((r) => setTimeout(r, 1500));
 
     const buyerResult = await sendBuyerTemplate();
+    console.log("BUYER TEMPLATE RESULT:", buyerResult);
 
     if (buyerResult.error) {
       throw new Error(buyerResult.error.message);
