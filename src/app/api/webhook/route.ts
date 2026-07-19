@@ -78,26 +78,57 @@ export async function POST(req: NextRequest) {
 
     console.log("Button clicked:", { title: buttonTitle, payload, from });
 
-    if (buttonTitle === "Invoice PDF" || buttonTitle.toLowerCase().includes("invoice pdf")) {
+    if (
+      buttonTitle === "Invoice PDF" ||
+      buttonTitle.toLowerCase().includes("invoice pdf")
+    ) {
       console.log("🖱️ BUYER KLIK INVOICE PDF!");
 
-      // Ambil order terbaru buyer ini (kamu harus punya logic ini)
-      // Untuk sementara, kita pakai dummy atau kirim request dengan orderId kosong dulu
+      // Ambil order terakhir berdasarkan nomor WA
+      const orderRes = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/get-order?wa=${encodeURIComponent(from)}`
+      );
+
+      const order = await orderRes.json();
+
+      if (!order.success) {
+        console.error("ORDER NOT FOUND", order);
+
+        return NextResponse.json({
+          ok: false,
+          error: "Order not found",
+        });
+      }
+
+      // Kirim PDF invoice
       await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/send-wa`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({
           buyerPhone: from,
           adminPhone: "6285975149508",
-          orderId: "LATEST",   // atau logic ambil order terbaru
-          pdfUrl: "",
+
+          orderId: order.orderId,
+          orderDate: order.orderDate,
+          customer: order.customer,
+          product: order.product,
+          total: order.total,
+          address: order.address,
+          status: order.status,
+          pdfUrl: order.pdfUrl,
+
           sendPdf: true,
         }),
       });
 
-      return NextResponse.json({ ok: true, pdfTriggered: true });
+      return NextResponse.json({
+        ok: true,
+        pdfTriggered: true,
+      });
     }
-
+    
     // === 3. Text Message (Auto Reply) ===
     if (type === "text") {
       const text = msg.text?.body || "";
