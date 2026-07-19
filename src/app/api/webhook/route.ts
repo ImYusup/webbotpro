@@ -83,24 +83,25 @@ export async function POST(req: NextRequest) {
       buttonTitle.toLowerCase().includes("invoice pdf")
     ) {
       console.log("🖱️ BUYER KLIK INVOICE PDF!");
-
-      // Ambil order terakhir berdasarkan nomor WA
       const orderRes = await fetch(
         `${process.env.NEXT_PUBLIC_BASE_URL}/api/get-order?wa=${encodeURIComponent(from)}`
       );
 
-      const order = await orderRes.json();
+      if (!orderRes.ok) {
+        console.error("GET ORDER FAILED");
+        return NextResponse.json({ ok: false });
+      }
 
-      if (!order.success) {
-        console.error("ORDER NOT FOUND", order);
+      const order: any = await orderRes.json();
 
+      if (!order.success || !order.data) {
+        console.error("ORDER NOT FOUND");
         return NextResponse.json({
           ok: false,
           error: "Order not found",
         });
       }
 
-      // Kirim PDF invoice
       await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/send-wa`, {
         method: "POST",
         headers: {
@@ -110,14 +111,14 @@ export async function POST(req: NextRequest) {
           buyerPhone: from,
           adminPhone: "6285975149508",
 
-          orderId: order.orderId,
-          orderDate: order.orderDate,
-          customer: order.customer,
-          product: order.product,
-          total: order.total,
-          address: order.address,
-          status: order.status,
-          pdfUrl: order.pdfUrl,
+          orderId: order.data.orderId,
+          orderDate: order.data.orderDate,
+          customer: order.data.customer,
+          product: order.data.product,
+          total: order.data.total,
+          address: order.data.address,
+          status: order.data.status,
+          pdfUrl: order.data.pdfUrl,
 
           sendPdf: true,
         }),
@@ -128,7 +129,7 @@ export async function POST(req: NextRequest) {
         pdfTriggered: true,
       });
     }
-    
+
     // === 3. Text Message (Auto Reply) ===
     if (type === "text") {
       const text = msg.text?.body || "";

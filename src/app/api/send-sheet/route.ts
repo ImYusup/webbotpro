@@ -88,7 +88,7 @@ export async function POST(req: NextRequest) {
     // Append values (pakai USER_ENTERED agar dropdown tetap hidup)
     const appendRes = await sheets.spreadsheets.values.update({
       spreadsheetId: SHEET_ID,
-      range: `${sheetName}!A${nextRow}:M${nextRow}`,
+      range: `${sheetName}!A${nextRow}:N${nextRow}`,
       valueInputOption: "USER_ENTERED",
       requestBody: { values },
     });
