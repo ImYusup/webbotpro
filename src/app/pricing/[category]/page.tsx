@@ -45,7 +45,7 @@ export default function PricingCategoryPage({ params }: Props) {
       "- This is a pre-order service.",
       "- Minimum 70% DP is required.",
       "- Development starts after payment.",
-      "- Estimated completion: 5-7 business days.",
+      "- Estimated completion: 3-5 business days.",
       "",
       "Could you please provide more details and next steps?",
       "",

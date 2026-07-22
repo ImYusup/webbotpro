@@ -63,8 +63,8 @@ export async function POST(req: NextRequest) {
 
     // Normalize
     const qty = Number.isFinite(Number(quantity)) ? Number(quantity) : 1;
-    const statusBayar = status?.trim() || "Belum Dibayar"; // harus sama persis dg dropdown
-    const statusKirim = "Belum Diproses"; // sesuai dropdown default
+    const statusBayar = status?.trim() || "Unpaid"; // harus sama persis dg dropdown
+    const statusKirim = "Pending"; // sesuai dropdown default
 
     const values = [
       [

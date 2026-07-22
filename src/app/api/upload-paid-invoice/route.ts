@@ -69,7 +69,7 @@ export async function POST(req: NextRequest) {
     pdf.text(`Rp ${Number(total).toLocaleString()}`, 140, y);
 
     y += 15;
-    pdf.text("Status: Dibayar", 10, y);
+    pdf.text("Status: Paid", 10, y);
     y += 8;
     pdf.text(`Transfer ke: ${bank.bank || "N/A"} - ${bank.account || "N/A"} a.n. ${bank.name || "N/A"}`, 10, y);
 

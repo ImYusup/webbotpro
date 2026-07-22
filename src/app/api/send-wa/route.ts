@@ -31,7 +31,13 @@ export async function POST(req: NextRequest) {
 
     const normalizePhone = (phone: string): string => {
       let clean = phone.replace(/\D/g, "");
-      if (clean.startsWith("0")) clean = "62" + clean.slice(1);
+
+      if (clean.startsWith("0")) {
+        clean = "62" + clean.slice(1);
+      } else if (clean.startsWith("8")) {
+        clean = "62" + clean;
+      }
+
       return clean;
     };
 
@@ -41,16 +47,16 @@ export async function POST(req: NextRequest) {
 
     // DEBUG
     console.log("================================");
-    console.log("PHONE_NUMBER_ID :", PHONE_NUMBER_ID);
-    console.log("BUYER WA        :", buyerWA);
-    console.log("ADMIN WA        :", adminWA);
-    console.log("GRAPH URL       :", url);
+    console.log("ORDER ID :", orderId);
+    console.log("BUYER    :", buyerWA);
+    console.log("ADMIN    :", adminWA);
+    console.log("PDF URL  :", pdfUrl || "-");
     console.log("================================");
 
     // =========================
     // LOCAL / INTERNATIONAL DETECTION
     // =========================
-    const templateName = "buyer_order";
+    const templateName = "order_buyer";
     const languageCode = "en";
 
     const formatIDR = (val: any) => {
@@ -59,33 +65,6 @@ export async function POST(req: NextRequest) {
     };
 
     const totalNumber = formatIDR(total);
-
-    // =========================
-    // LANGUAGE MESSAGES
-    // =========================
-
-    const MESSAGES = {
-      en: {
-        pdfCaption: (
-          orderId: string,
-          total: number
-        ) =>
-          `✅ Invoice ${orderId} - WebBotPro
-Total: Rp ${total.toLocaleString("id-ID")}
-Thank you for shopping at WebBotPro 🙏`,
-
-        failed: (
-          orderId: string,
-          pdfUrl: string
-        ) =>
-          `📄 Invoice ${orderId}
-
-Failed to send PDF via WhatsApp.
-
-Please download here:
-${pdfUrl}`,
-      },
-    };
 
     // =========================
     // SEND TEXT MESSAGE
@@ -101,7 +80,10 @@ ${pdfUrl}`,
       };
 
       console.log("========== TEXT ==========");
-      console.log(JSON.stringify(payload, null, 2));
+      console.log({
+        to,
+        message,
+      });
 
       const res = await fetch(url, {
         method: "POST",
@@ -112,12 +94,15 @@ ${pdfUrl}`,
         body: JSON.stringify(payload),
       });
 
-      const raw = await res.text();
+      const result = await res.json();
 
-      console.log("HTTP:", res.status);
-      console.log(raw);
+      console.log("TEXT RESULT:", result);
 
-      return JSON.parse(raw);
+      if (result.error) {
+        console.error(result.error);
+      }
+
+      return result;
     };
 
     // =========================
@@ -163,12 +148,10 @@ ${pdfUrl}`,
         body: JSON.stringify(payload),
       });
 
-      const raw = await res.text();
+      const result = await res.json();
+      console.log("ADMIN RESULT:", result);
 
-      console.log("HTTP:", res.status);
-      console.log(raw);
-
-      return JSON.parse(raw);
+      return result;
     };
 
     // =========================
@@ -196,6 +179,7 @@ ${pdfUrl}`,
                 { type: "text", text: totalNumber.toLocaleString("id-ID") },
                 { type: "text", text: address },
                 { type: "text", text: status },
+                { type: "text", text: pdfUrl || "-" },
               ],
             },
           ],
@@ -214,161 +198,10 @@ ${pdfUrl}`,
         body: JSON.stringify(payload),
       });
 
-      const raw = await res.text();
-
-      console.log("HTTP:", res.status);
-      console.log(raw);
-
-      return JSON.parse(raw);
-    };
-
-    // =========================
-    // SEND PDF
-    // =========================
-    const sendPDF = async () => {
-      if (!pdfUrl) return null;
-
-      let directUrl = pdfUrl;
-
-      if (
-        pdfUrl.includes(
-          "drive.google.com"
-        )
-      ) {
-        const fileId =
-          pdfUrl.match(
-            /\/d\/([a-zA-Z0-9_-]+)/
-          )?.[1] ||
-          pdfUrl.match(
-            /[?&]id=([a-zA-Z0-9_-]+)/
-          )?.[1];
-
-        if (fileId) {
-          directUrl =
-            `https://drive.usercontent.google.com/download?id=${fileId}&export=download&confirm=t`;
-        }
-      }
-
-      const pdfRes =
-        await fetch(directUrl);
-
-      if (!pdfRes.ok) {
-        throw new Error(
-          "PDF_DOWNLOAD_FAILED"
-        );
-      }
-
-      const pdfBuffer =
-        Buffer.from(
-          await pdfRes.arrayBuffer()
-        );
-
-      const form =
-        new FormData();
-
-      form.append(
-        "messaging_product",
-        "whatsapp"
-      );
-
-      form.append(
-        "file",
-        new File(
-          [pdfBuffer],
-          `Invoice_${orderId}.pdf`,
-          {
-            type:
-              "application/pdf",
-          }
-        )
-      );
-
-      const uploadRes =
-        await fetch(
-          `https://graph.facebook.com/v23.0/${PHONE_NUMBER_ID}/media`,
-          {
-            method: "POST",
-
-            headers: {
-              Authorization:
-                `Bearer ${ACCESS_TOKEN}`,
-            },
-
-            body: form,
-          }
-        );
-
-      const upload =
-        await uploadRes.json();
-
-      if (!upload.id) {
-        throw new Error(
-          JSON.stringify(upload)
-        );
-      }
-
-      const sendRes = await fetch(url, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${ACCESS_TOKEN}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          messaging_product: "whatsapp",
-          to: buyerWA,
-          type: "document",
-          document: {
-            id: upload.id,
-            filename: `Invoice_${orderId}.pdf`,
-            caption: MESSAGES.en.pdfCaption(
-              orderId,
-              totalNumber
-            ),
-          },
-        }),
-      });
-
-      const result = await sendRes.json();
-
-      if (!sendRes.ok || !result.messages) {
-        throw new Error(
-          result?.error?.message ||
-          "SEND_DOCUMENT_FAILED"
-        );
-      }
-
+      const result = await res.json();
+      console.log("BUYER RESULT:", result);
       return result;
     };
-
-    // =========================
-    // PDF MODE (Button Click)
-    // =========================
-    const sendPdf = data.sendPdf === true;
-
-    if (sendPdf) {
-      console.log("📄 PDF REQUEST MODE from button click");
-
-      let pdfResult = null;
-
-      try {
-        pdfResult = await sendPDF();
-        console.log("✅ PDF SENT to buyer");
-      } catch (err: any) {
-        console.error("❌ PDF ERROR:", err);
-
-        if (pdfUrl) {
-          await sendTextMessage(
-            buyerWA,
-            MESSAGES.en.failed(orderId, pdfUrl)
-          );
-        }
-      }
-
-      return NextResponse.json({
-        success: true,
-        pdfSent: !!pdfResult,
-      });
-    }
 
     // =========================
     // FINAL FLOW - NEW ORDER
@@ -378,11 +211,11 @@ ${pdfUrl}`,
     // 1. Send template ke admin
     console.log("📨 SEND TEMPLATE → ADMIN");
     const adminResult = await sendAdminTemplate();
-    console.log("ADMIN TEMPLATE RESULT:", adminResult);
 
     if (adminResult.error) {
       throw new Error(adminResult.error.message);
     }
+
     // 2. Kirim link PDF ke admin
     if (pdfUrl) {
       await new Promise((r) => setTimeout(r, 1000));
@@ -403,7 +236,6 @@ ${pdfUrl}`,
     await new Promise((r) => setTimeout(r, 1500));
 
     const buyerResult = await sendBuyerTemplate();
-    console.log("BUYER TEMPLATE RESULT:", buyerResult);
 
     if (buyerResult.error) {
       throw new Error(buyerResult.error.message);
@@ -411,7 +243,7 @@ ${pdfUrl}`,
 
     return NextResponse.json({
       success: true,
-      waitingBuyerClick: true,
+      pdfUrl,
     });
 
   } catch (err: any) {

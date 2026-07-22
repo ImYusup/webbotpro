@@ -98,7 +98,7 @@ export default function OrderComplete() {
             wa: order.billing.phone,
             email: order.billing.email || "-",
             address: `${order.billing.street}, ${order.billing.city}`,
-            status: "Belum Dibayar",
+            status: "Unpaid",
             pdfUrl: invoiceUrl,
           }),
         });
@@ -119,7 +119,7 @@ export default function OrderComplete() {
             wa: order.billing.phone,
             email: order.billing.email || "-",
             address: `${order.billing.street}, ${order.billing.city}`,
-            status: "Belum Dibayar",
+            status: "Unpaid",
             pdfUrl: invoiceUrl,
           }),
         });

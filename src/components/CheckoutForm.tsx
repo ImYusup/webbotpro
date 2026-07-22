@@ -77,15 +77,10 @@ export default function CheckoutForm() {
   };
 
   const paymentMethods: { id: PaymentMethod; title: string; icons: string[]; desc: string }[] = [
-    { id: "bca_manual", title: "Manual Transfer BCA", icons: ["https://wellborncompany.com/wp-content/plugins/wc-bank-indonesia/img/bca.png"], desc: "Bayar ke rekening BCA kami. Gunakan ID Pesanan sebagai referensi." },
-    { id: "bri_manual", title: "Manual Transfer BRI", icons: ["https://wellborncompany.com/wp-content/plugins/wc-bank-indonesia/img/bri.png"], desc: "Transfer ke BRI. Kami cek manual." },
-    { id: "mandiri_manual", title: "Manual Transfer Mandiri", icons: ["https://wellborncompany.com/wp-content/plugins/wc-bank-indonesia/img/mandiri.png"], desc: "Bayar ke Mandiri. Sertakan ID Pesanan." },
-    { id: "seabank_manual", title: "Manual Transfer Seabank", icons: ["/icons/seabank.svg"], desc: "Transfer via Seabank. Konfirmasi otomatis." },
-    // { id: "qris", title: "QRIS", icons: ["https://wellborncompany.com/wp-content/plugins/midtrans-woocommerce/public/images/payment-methods/qris.png"], desc: "Scan QRIS: DANA, GoPay, ShopeePay, dll." },
-    // { id: "bca_va", title: "BCA Virtual Account", icons: ["https://wellborncompany.com/wp-content/plugins/midtrans-woocommerce/public/images/payment-methods/bca_va.png"], desc: "Bayar via ATM/mBanking BCA." },
-    // { id: "bri_va", title: "BRI Virtual Account", icons: ["https://wellborncompany.com/wp-content/plugins/midtrans-woocommerce/public/images/payment-methods/bri_va.png"], desc: "Transfer ke BRI VA." },
-    // { id: "mandiri_va", title: "Mandiri Virtual Account", icons: ["https://wellborncompany.com/wp-content/plugins/midtrans-woocommerce/public/images/payment-methods/echannel.png"], desc: "Gunakan VA Mandiri." },
-    // { id: "bni_va", title: "BNI Virtual Account", icons: ["https://wellborncompany.com/wp-content/plugins/midtrans-woocommerce/public/images/payment-methods/bni_va.png"], desc: "Bayar via BNI." },
+    { id: "bca_manual", title: "Manual Transfer BCA", icons: ["https://wellborncompany.com/wp-content/plugins/wc-bank-indonesia/img/bca.png"], desc: "Transfer the payment to our BCA bank account. Use your Order ID as the payment reference." },
+    { id: "bri_manual", title: "Manual Transfer BRI", icons: ["https://wellborncompany.com/wp-content/plugins/wc-bank-indonesia/img/bri.png"], desc: "Transfer the payment to our BRI bank account. Payments are verified manually." },
+    { id: "mandiri_manual", title: "Manual Transfer Mandiri", icons: ["https://wellborncompany.com/wp-content/plugins/wc-bank-indonesia/img/mandiri.png"], desc: "Transfer the payment to our Mandiri bank account. Include your Order ID as the payment reference." },
+    { id: "seabank_manual", title: "Manual Transfer Seabank", icons: ["/icons/seabank.svg"], desc: "Transfer via SeaBank. Your payment will be confirmed automatically." },
     { id: "crypto", title: "Cryptocurrency USDT TRON (TRC20)", icons: ["/icons/usdt.svg"], desc: "TFmZHeEjR9P2jjCp1NhKzXLicwdrAXfCFN" },
     { id: "card", title: "Credit/Debit Card", icons: ["https://wellborncompany.com/wp-content/plugins/midtrans-woocommerce/public/images/payment-methods/cc_visa.png", "https://wellborncompany.com/wp-content/plugins/midtrans-woocommerce/public/images/payment-methods/cc_master.png"], desc: "VISA, MasterCard, JCB, Amex." },
   ];
@@ -696,7 +691,7 @@ export default function CheckoutForm() {
                             <strong>⚠️ WARNING:</strong> Only send on <b>TRON TRC20 network (USDT)</b>. Wrong network = funds lost forever.
                           </p>
                           <p className="text-xs text-red-700 mt-1">
-                            Exact amount: <strong>${(total / 10000).toFixed(2)} USDT</strong>
+                            Exact amount: <strong>${(total / 14000).toFixed(2)} USDT</strong>
                           </p>
                         </div>
 

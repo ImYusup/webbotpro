@@ -50,7 +50,7 @@ export const products: Product[] = [
             "Business owners who want instant reports on WhatsApp",
             "Entrepreneurs scaling up and needing smart financial monitoring",
         ],
-        notes: "Pre-order service. Requires 70% DP. Delivery takes approximately 5-7 business days after payment.",
+        notes: "Pre-order service. Requires 70% DP. Delivery takes approximately 3-5 business days after payment.",
         images: [
             "/images/whatsapp/cashflow-jualan.png",
             "/images/whatsapp/cashflow-jualan1.jpeg",
@@ -87,7 +87,7 @@ export const products: Product[] = [
             "Businesses needing automatic order systems",
             "Dropshippers and resellers looking for efficiency",
         ],
-        notes: "This is a pre-order service. Minimum 70% DP is required. After payment, work will begin and usually takes 5-7 business days to complete.",
+        notes: "This is a pre-order service. Minimum 70% DP is required. After payment, work will begin and usually takes 3-5 business days to complete.",
         images: [
             "/images/whatsapp/wa-jualan.png",
             "/images/whatsapp/wa-jualan1.jpeg",
@@ -122,7 +122,7 @@ export const products: Product[] = [
             "Startups wanting a professional landing page",
             "Local businesses that want to appear online",
         ],
-        notes: "This is a pre-order service. Minimum 70% DP is required. After payment, work will begin and usually takes 5-7 business days to complete.",
+        notes: "This is a pre-order service. Minimum 70% DP is required. After payment, work will begin and usually takes 3-5 business days to complete.",
         images: [
             "/images/website/wb-webbotpro.png",
             "/images/website/wb-webbotpro1.jpg",
@@ -159,7 +159,7 @@ export const products: Product[] = [
             "Businesses selling on Instagram/TikTok who want an official website",
             "Startups and local brands needing integrated e-commerce",
         ],
-        notes: "This is a pre-order service. Minimum 70% down payment (DP) is required. After payment is received, our team will contact you to collect product data, logo, and integration requirements. The project usually takes 5-7 business days to complete.",
+        notes: "This is a pre-order service. Minimum 70% down payment (DP) is required. After payment is received, our team will contact you to collect product data, logo, and integration requirements. The project usually takes 3-5 business days to complete.",
         images: [
             "/images/website/bg-webbotpro.png",
             "/images/website/bg-webbotpro1.jpg",
@@ -197,7 +197,7 @@ export const products: Product[] = [
             "Personal branding & freelancers",
             "Startups wanting a professional online presence",
         ],
-        notes: "This is a pre-order service. Minimum 70% DP is required. After payment, work will begin and usually takes 5-7 business days to complete.",
+        notes: "This is a pre-order service. Minimum 70% DP is required. After payment, work will begin and usually takes 3-5 business days to complete.",
         images: [
             "/images/website/smb-webbotpro.png",
             "/images/website/smb-webbotpro1.jpeg",
@@ -236,7 +236,7 @@ export const products: Product[] = [
             "Companies using Google Sheets/Excel but want better data visualization",
             "Startups adopting data-driven decision making",
         ],
-        notes: "This is a pre-order service. Minimum 70% DP is required. After payment, work will begin and usually takes 5-7 business days to complete.",
+        notes: "This is a pre-order service. Minimum 70% DP is required. After payment, work will begin and usually takes 3-5 business days to complete.",
         images: [
             "/images/powerbi/powerbi1.png",
             "/images/powerbi/powerbi2.png",

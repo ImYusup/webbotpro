@@ -8,7 +8,7 @@ export const dynamic = "force-dynamic";
 
 export const metadata = {
   title: "Checkout | WebBotPro",
-  description: "Selesaikan pesanan Anda dengan aman dan cepat melalui halaman checkout WebBotPro.",
+  description:   "Complete your order securely and quickly through the WebBotPro checkout page.",
 };
 
 export default function CheckoutPage() {

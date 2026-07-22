@@ -1,8 +1,6 @@
 // src/app/api/webhook/route.ts
 import { NextRequest, NextResponse } from "next/server";
 
-const ACCESS_TOKEN = process.env.WHATSAPP_ACCESS_TOKEN!;
-const PHONE_NUMBER_ID = process.env.PHONE_NUMBER_ID!;
 const VERIFY_TOKEN = process.env.VERIFY_TOKEN!;
 
 /**
@@ -64,73 +62,7 @@ export async function POST(req: NextRequest) {
     const from = msg.from;
     const type = msg.type;
 
-    // === 2. HANDLE BUTTON CLICK (Invoice PDF) ===
-    let buttonTitle = "";
-    let payload = "";
-
-    if (msg.interactive?.button_reply) {
-      buttonTitle = msg.interactive.button_reply.title || "";
-      payload = msg.interactive.button_reply.id || "";
-    } else if (msg.button) {
-      buttonTitle = msg.button.text || "";
-      payload = msg.button.payload || "";
-    }
-
-    console.log("Button clicked:", { title: buttonTitle, payload, from });
-
-    if (
-      buttonTitle === "Invoice PDF" ||
-      buttonTitle.toLowerCase().includes("invoice pdf")
-    ) {
-      console.log("🖱️ BUYER KLIK INVOICE PDF!");
-      const orderRes = await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/get-order?wa=${encodeURIComponent(from)}`
-      );
-
-      if (!orderRes.ok) {
-        console.error("GET ORDER FAILED");
-        return NextResponse.json({ ok: false });
-      }
-
-      const order: any = await orderRes.json();
-
-      if (!order.success || !order.data) {
-        console.error("ORDER NOT FOUND");
-        return NextResponse.json({
-          ok: false,
-          error: "Order not found",
-        });
-      }
-
-      await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/send-wa`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          buyerPhone: from,
-          adminPhone: "6285975149508",
-
-          orderId: order.data.orderId,
-          orderDate: order.data.orderDate,
-          customer: order.data.customer,
-          product: order.data.product,
-          total: order.data.total,
-          address: order.data.address,
-          status: order.data.status,
-          pdfUrl: order.data.pdfUrl,
-
-          sendPdf: true,
-        }),
-      });
-
-      return NextResponse.json({
-        ok: true,
-        pdfTriggered: true,
-      });
-    }
-
-    // === 3. Text Message (Auto Reply) ===
+       // === 3. Text Message (Auto Reply) ===
     if (type === "text") {
       const text = msg.text?.body || "";
       console.log(`💬 TEXT FROM ${from}: ${text}`);
