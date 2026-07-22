@@ -24,6 +24,10 @@ const manrope = Manrope({
 export const metadata: Metadata = {
   metadataBase: new URL("https://webbotpro.com"),
 
+  verification: {
+    google: "moJ5Sl1jpzi_sbMyQ6hGd9YHAA_jaWZZ9fCZgBessOE",
+  },
+
   title: {
     default:
       "WebBotPro | WhatsApp Automation, AI Solutions & Business Intelligence",
