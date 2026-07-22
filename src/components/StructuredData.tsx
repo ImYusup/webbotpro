@@ -10,7 +10,7 @@ export default function StructuredData() {
         url: "https://webbotpro.com",
         logo: {
           "@type": "ImageObject",
-          url: "https://webbotpro.com/logo/logo.png",
+          url: "https://www.webbotpro.com/favicon.png",
         },
         description:
           "WebBotPro provides website development, WhatsApp automation, AI solutions, digital marketing, SEO, paid advertising, and business intelligence services worldwide.",
