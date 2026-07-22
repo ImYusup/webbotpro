@@ -39,7 +39,7 @@ export default function StructuredData() {
         name: "WebBotPro",
         image: "https://webbotpro.com/og-image.png",
         url: "https://webbotpro.com",
-        telephone: "+628xxxxxxxxxx",
+        telephone: "+6285975149508",
         areaServed: "Worldwide",
         priceRange: "$$",
         description:
