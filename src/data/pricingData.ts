@@ -9,6 +9,10 @@ export const pricingCategories = [
     name: "Websites",
   },
   {
+    id: "live-commerce",
+    name: "Live Commerce",
+  },
+  {
     id: "data",
     name: "Business Intelligence",
   },
@@ -143,6 +147,69 @@ export const pricingData = {
     ],
   },
 
+  "live-commerce": {
+    title: "Live Commerce",
+    plans: [
+      {
+        name: "Shopee Live",
+        priceFrom: "Rp 40.000",
+        priceTo: "/ Hour",
+        description:
+          "Professional Shopee Live hosting service to increase audience engagement and drive more sales.",
+        features: [
+          "Hourly Session (1 Hour)",
+          "Daily Package (4 Hours)",
+          "Weekly Package (32 Hours)",
+          "Monthly Package (120 Hours)",
+          "Professional Live Host",
+          "Product Showcase & Audience Interaction",
+        ],
+        note:
+          "Packages available from Rp150.000/day up to Rp4.500.000/month.",
+
+        preOrderNote:
+          "Live schedules are subject to availability. Contact us for booking.",
+      },
+      {
+        name: "TikTok Shop Live",
+        priceFrom: "Rp 40.000",
+        priceTo: "/ Hour",
+        description:
+          "Interactive TikTok Shop live sessions designed to improve engagement and maximize product conversions.",
+        features: [
+          "Hourly Session (1 Hour)",
+          "Daily Package (4 Hours)",
+          "Weekly Package (32 Hours)",
+          "Monthly Package (120 Hours)",
+          "Professional Live Host",
+          "Real-Time Product Demonstration",
+        ],
+        note:
+          "Packages available from Rp150.000/day up to Rp4.500.000/month.",
+        preOrderNote:
+          "Live schedules are subject to availability. Contact us for booking.",
+      },
+      {
+        name: "E-Commerce Live",
+        priceFrom: "Rp 40.000",
+        priceTo: "/ Hour",
+        description:
+          "Professional live commerce hosting service for brands selling across multiple social media and e-commerce platforms.",
+        features: [
+          "Professional Live Host",
+          "Facebook & Instagram Live",
+          "Tokopedia & Lazada Live",
+          "Custom Marketplace Support",
+          "Product Presentation & Demonstration",
+          "Audience Engagement & Live Selling",
+        ],
+        note:
+          "Packages available from Rp150.000/day up to Rp4.500.000/month.",
+        preOrderNote:
+          "Need a dedicated host for campaigns or long-term collaboration? Contact us for a customized quotation.",
+      },
+    ],
+  },
   data: {
     title: "Business Intelligence",
     plans: [

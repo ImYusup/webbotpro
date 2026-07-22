@@ -29,8 +29,10 @@ export default function PricingCategoryPage({ params }: Props) {
     const packageName = cleanPlanName(planName);
 
     const priceRange = priceTo
-      ? `${priceFrom} - ${priceTo}`
+      ? `${priceFrom} ${priceTo}`
       : priceFrom;
+
+    const isLiveCommerce = category === "live-commerce";
 
     const text = [
       "Hello WebBotPro,",
@@ -42,10 +44,18 @@ export default function PricingCategoryPage({ params }: Props) {
       `Category: ${data.title}`,
       "",
       "Note:",
-      "- This is a pre-order service.",
-      "- Minimum 70% DP is required.",
-      "- Development starts after payment.",
-      "- Estimated completion: 3-5 business days.",
+      ...(isLiveCommerce
+        ? [
+          "- This is a booking service.",
+          "- Schedule is subject to availability.",
+          "- Please let me know the available time slots.",
+        ]
+        : [
+          "- This is a pre-order service.",
+          "- Minimum 70% DP is required.",
+          "- Development starts after payment.",
+          "- Estimated completion: 3-5 business days.",
+        ]),
       "",
       "Could you please provide more details and next steps?",
       "",
@@ -54,6 +64,7 @@ export default function PricingCategoryPage({ params }: Props) {
 
     return `https://wa.me/6285975149508?text=${encodeURIComponent(text)}`;
   };
+  
   return (
     <div className="min-h-screen bg-gray-50 py-16">
       <div className="max-w-7xl mx-auto px-4">

@@ -18,7 +18,7 @@ const geist = Geist({
 const manrope = Manrope({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-manrope", 
+  variable: "--font-manrope",
 });
 
 export const metadata: Metadata = {
@@ -110,7 +110,33 @@ export const metadata: Metadata = {
     "Bali",
     "Singapore",
     "Malaysia",
-    "Global Digital Agency"
+    "Global Digital Agency",
+
+    // Live Commerce
+    "Live Commerce",
+    "E-Commerce Live Streaming",
+    "Live Streaming Service",
+    "Professional Live Host",
+    "Shopee Live",
+    "Shopee Live Host",
+    "Shopee Live Streaming",
+    "TikTok Shop Live",
+    "TikTok Live Host",
+    "TikTok Live Streaming",
+    "Facebook Live Selling",
+    "Instagram Live Selling",
+    "Tokopedia Live",
+    "Lazada Live",
+    "Live Shopping",
+    "Live Selling",
+    "Marketplace Live",
+    "Social Commerce",
+    "Jasa Live Shopee",
+    "Jasa Live TikTok",
+    "Host Live Shopee",
+    "Host Live TikTok",
+    "Jasa Live Streaming",
+    "Live Commerce Indonesia",
 
   ],
 
@@ -129,7 +155,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "WebBotPro | WhatsApp Automation, AI & Business Intelligence",
     description:
-      "Global automation solutions including WhatsApp Business Automation, AI Solutions, Websites, Digital Marketing and Business Intelligence.",
+      "Global automation solutions including WhatsApp Automation, AI Solutions, Website Development, Live Commerce, Digital Marketing, Business Intelligence, and E-Commerce Live Streaming.",
     url: "https://webbotpro.com",
     siteName: "WebBotPro",
     locale: "en_US",
