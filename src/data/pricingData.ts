@@ -159,17 +159,21 @@ export const pricingData = {
         features: [
           "Hourly Session (1 Hour)",
           "Daily Package (4 Hours)",
-          "Weekly Package (32 Hours)",
-          "Monthly Package (120 Hours)",
+          "Weekly Package (28 Hours)",
+          "Monthly Package (112 Hours)",
           "Professional Live Host",
           "Product Showcase & Audience Interaction",
+          "Professional Studio Setup",
+          "OBS Live Streaming System",
+          "Performance Dashboard Report",
+          "Live Performance Optimization",
         ],
         note:
-          "Packages available from Rp150.000/day up to Rp4.500.000/month.",
-
+          "Packages available from Rp150.000/day up to Rp4.200.000/month.",
         preOrderNote:
           "Live schedules are subject to availability. Contact us for booking.",
       },
+
       {
         name: "TikTok Shop Live",
         priceFrom: "Rp 40.000",
@@ -179,16 +183,21 @@ export const pricingData = {
         features: [
           "Hourly Session (1 Hour)",
           "Daily Package (4 Hours)",
-          "Weekly Package (32 Hours)",
-          "Monthly Package (120 Hours)",
+          "Weekly Package (28 Hours)",
+          "Monthly Package (112 Hours)",
           "Professional Live Host",
           "Real-Time Product Demonstration",
+          "Professional Studio Setup",
+          "OBS Live Streaming System",
+          "Performance Dashboard Report",
+          "Live Performance Optimization",
         ],
         note:
-          "Packages available from Rp150.000/day up to Rp4.500.000/month.",
+          "Packages available from Rp150.000/day up to Rp4.200.000/month.",
         preOrderNote:
           "Live schedules are subject to availability. Contact us for booking.",
       },
+
       {
         name: "E-Commerce Live",
         priceFrom: "Rp 40.000",
@@ -202,9 +211,13 @@ export const pricingData = {
           "Custom Marketplace Support",
           "Product Presentation & Demonstration",
           "Audience Engagement & Live Selling",
+          "Professional Studio Setup",
+          "OBS Live Streaming System",
+          "Performance Dashboard Report",
+          "Multi-Platform Live Optimization",
         ],
         note:
-          "Packages available from Rp150.000/day up to Rp4.500.000/month.",
+          "Packages available from Rp150.000/day up to Rp4.200.000/month.",
         preOrderNote:
           "Need a dedicated host for campaigns or long-term collaboration? Contact us for a customized quotation.",
       },
