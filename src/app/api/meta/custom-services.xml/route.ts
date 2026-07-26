@@ -116,3 +116,61 @@ Contact us for a personalized quotation.`,
     category: "Business Intelligence",
   },
 ];
+
+export async function GET() {
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+xmlns:g="http://base.google.com/ns/1.0">
+<channel>
+
+<title>WebBotPro Custom Services</title>
+<link>${BASE_URL}</link>
+<description>Professional Custom Digital Services by WebBotPro</description>
+
+${services
+  .map(
+    (service) => `
+<item>
+
+<g:id>${service.id}</g:id>
+
+<g:title><![CDATA[
+${service.title}
+]]></g:title>
+
+<g:description><![CDATA[
+${service.description}
+]]></g:description>
+
+<g:link>
+${BASE_URL}${service.link}
+</g:link>
+
+<g:image_link>
+${BASE_URL}${service.image}
+</g:image_link>
+
+<g:availability>in stock</g:availability>
+
+<g:condition>new</g:condition>
+
+<g:price>${service.price} IDR</g:price>
+
+<g:brand>WebBotPro</g:brand>
+
+<g:product_type>${service.category}</g:product_type>
+
+</item>
+`
+  )
+  .join("")}
+
+</channel>
+</rss>`;
+
+  return new Response(xml, {
+    headers: {
+      "Content-Type": "application/xml",
+    },
+  });
+}
