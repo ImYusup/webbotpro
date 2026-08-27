@@ -1,32 +1,73 @@
 // src/data/products.ts
 export type ProductVariant = {
-  id: string;
-  color: string;
-  colorCode?: string;
-  images: string[];
-  videoUrl?: string;
-  price?: number;
+    id: string;
+    color: string;
+    colorCode?: string;
+    images: string[];
+    videoUrl?: string;
+    price?: number;
 };
 
 export type Product = {
-  id: string;
-  name: string;
-  category?: string;
-  price: number;
-  discountPrice?: number;
-  currency: string;
-  description: string;
-  images: string[];
-  videoUrl?: string;
-  weight?: number; 
-  variants?: ProductVariant[];
-  features?: string[];
-  benefits?: string[];
-  targetUsers?: string[];
-  notes?: string;
+    id: string;
+    name: string;
+    category?: string;
+    price: number;
+    discountPrice?: number;
+    currency: string;
+    description: string;
+    images: string[];
+    videoUrl?: string;
+    weight?: number;
+    variants?: ProductVariant[];
+    features?: string[];
+    benefits?: string[];
+    targetUsers?: string[];
+    notes?: string;
 };
 
 export const products: Product[] = [
+    {
+        id: "market-signal",
+        name: "WhatsApp Market Signal",
+        category: "Trading Signal",
+        price: 200000,
+        discountPrice: 100000,
+        currency: "IDR",
+        description:
+            "Market signal for Gold (XAU/USD) and cryptocurrencies via private channel. Support, resistance, and market summary on 15M, 30M, and 1H timeframes. Subscribe monthly and get access after payment confirmation.",
+        features: [
+            "Signals for XAU/USD, BTC, ETH, BNB, and SOL",
+            "Timeframes: 15M · 30M · 1H",
+            "Support & resistance levels with market summary",
+            "Private Telegram channel after activation",
+            "WhatsApp info & subscription support",
+        ],
+        benefits: [
+            "Clearer market view before taking trades",
+            "Multi-market coverage in one subscription",
+            "Fast access after payment is confirmed",
+            "No pre-order — product is ready to use",
+        ],
+        targetUsers: [
+            "Traders focusing on gold (XAU/USD)",
+            "Crypto traders (BTC, ETH, BNB, SOL)",
+            "Beginners who want structured market levels",
+            "Anyone who prefers signals on a private channel",
+        ],
+        notes:
+            "Ready to use. Subscription is Rp 100.000 per month. After payment is confirmed, your account is activated and you receive a private Telegram channel invite. No down payment required.",
+        images: [
+            "/images/whatsapp/wa-market.jpg",
+            "/images/whatsapp/wa-market1.jpg",
+            "/images/whatsapp/wa-market2.jpg",
+            "/images/whatsapp/wa-market3.jpg",
+            "/images/whatsapp/wa-market4.jpg",
+            "/images/whatsapp/wa-market5.jpg",
+
+        ],
+        videoUrl: "https://drive.google.com/file/d/1XctbXLyk6p9jTaoThlZ4_jJsZ-Cq7Y6u/preview",
+    },
     {
         id: "cashflow-bot",
         name: "WhatsApp Bot Cashflow Automation",
@@ -65,8 +106,8 @@ export const products: Product[] = [
         id: "sales-bot",
         name: "WhatsApp Bot Sales Automation",
         category: "Automation",
-        price: 1000000,
-        discountPrice: 800000,
+        price: 700000,
+        discountPrice: 500000,
         currency: "IDR",
         description: "WhatsApp bot for sales automation, catalog, and order notifications. Makes selling easier and faster.",
         features: [
