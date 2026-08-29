@@ -30,7 +30,7 @@ export const products: Product[] = [
     {
         id: "market-signal",
         name: "WhatsApp Market Signal",
-        category: "Trading Signal",
+        category: "Automation",
         price: 200000,
         discountPrice: 100000,
         currency: "IDR",
