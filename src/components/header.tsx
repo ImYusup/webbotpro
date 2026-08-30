@@ -34,6 +34,13 @@ export function Header() {
             Custom
           </Link>
 
+          <Link
+            href="/investing"
+            className="text-foreground font-semibold text-lg hover:text-primary transition-colors"
+          >
+            Investing
+          </Link>
+
           {/* FIXED */}
           <Link
             href="/about-us"
@@ -71,6 +78,14 @@ export function Header() {
               onClick={() => setIsMenuOpen(false)}
             >
               Custom
+            </Link>
+
+            <Link
+              href="/investing"
+              className="block text-foreground font-semibold text-lg"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Investing
             </Link>
 
             {/* FIXED */}

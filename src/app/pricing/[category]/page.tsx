@@ -28,9 +28,7 @@ export default function PricingCategoryPage({ params }: Props) {
   ) => {
     const packageName = cleanPlanName(planName);
 
-    const priceRange = priceTo
-      ? `${priceFrom} ${priceTo}`
-      : priceFrom;
+    const priceRange = priceTo ? `${priceFrom} ${priceTo}` : priceFrom;
 
     const isLiveCommerce = category === "live-commerce";
 
@@ -46,16 +44,16 @@ export default function PricingCategoryPage({ params }: Props) {
       "Note:",
       ...(isLiveCommerce
         ? [
-          "- This is a booking service.",
-          "- Schedule is subject to availability.",
-          "- Please let me know the available time slots.",
-        ]
+            "- This is a booking service.",
+            "- Schedule is subject to availability.",
+            "- Please let me know the available time slots.",
+          ]
         : [
-          "- This is a pre-order service.",
-          "- Minimum 70% DP is required.",
-          "- Development starts after payment.",
-          "- Estimated completion: 3-5 business days.",
-        ]),
+            "- This is a pre-order service.",
+            "- Minimum 70% DP is required.",
+            "- Development starts after payment.",
+            "- Estimated completion: 3-5 business days.",
+          ]),
       "",
       "Could you please provide more details and next steps?",
       "",
@@ -64,29 +62,36 @@ export default function PricingCategoryPage({ params }: Props) {
 
     return `https://wa.me/6285975149508?text=${encodeURIComponent(text)}`;
   };
-  
+
   return (
     <div className="min-h-screen bg-gray-50 py-16">
       <div className="max-w-7xl mx-auto px-4">
+
+        {/* HEADER CENTERED - dipindah ke luar flex */}
+        <div className="text-center mb-12">
+          <h1 className="text-5xl font-bold text-gray-900">
+            {data.title}
+          </h1>
+          <p className="mt-4 text-lg text-gray-600">
+            Explore our available packages and choose the one that fits your business.
+          </p>
+        </div>
 
         <div className="flex flex-col lg:flex-row gap-10">
 
           {/* Sidebar */}
           <aside className="lg:w-72 shrink-0">
             <div className="sticky top-24 rounded-3xl border bg-white p-8 shadow-sm">
-
-              <h2 className="text-2xl font-bold mb-6">
-                Categories
-              </h2>
+              <h2 className="text-2xl font-bold mb-6">Categories</h2>
 
               <nav className="flex flex-col gap-3">
-
                 <Link
                   href="/pricing"
-                  className={`rounded-2xl px-6 py-3.5 font-semibold transition ${category === undefined
-                    ? "bg-teal-600 text-white"
-                    : "hover:bg-gray-100"
-                    }`}
+                  className={`rounded-2xl px-6 py-3.5 font-semibold transition ${
+                    category === undefined
+                      ? "bg-teal-600 text-white"
+                      : "hover:bg-gray-100"
+                  }`}
                 >
                   All Pricing
                 </Link>
@@ -95,35 +100,22 @@ export default function PricingCategoryPage({ params }: Props) {
                   <Link
                     key={item.id}
                     href={`/pricing/${item.id}`}
-                    className={`rounded-2xl px-6 py-3.5 font-semibold transition ${item.id === category
-                      ? "bg-teal-600 text-white"
-                      : "text-gray-700 hover:bg-gray-100"
-                      }`}
+                    className={`rounded-2xl px-6 py-3.5 font-semibold transition ${
+                      item.id === category
+                        ? "bg-teal-600 text-white"
+                        : "text-gray-700 hover:bg-gray-100"
+                    }`}
                   >
                     {item.name}
                   </Link>
                 ))}
-
               </nav>
-
             </div>
           </aside>
 
           {/* Content */}
           <main className="flex-1">
-
-            <div className="mb-12 text-center">
-              <h1 className="text-5xl font-bold text-gray-900">
-                {data.title}
-              </h1>
-
-              <p className="mt-4 text-lg text-gray-600">
-                Explore our available packages and choose the one that fits your business.
-              </p>
-            </div>
-
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-
               {data.plans.map((plan, i) => (
                 <div
                   key={i}
@@ -173,22 +165,23 @@ export default function PricingCategoryPage({ params }: Props) {
                   )}
 
                   <Link
-                    href={getWhatsAppLink(plan.name, plan.priceFrom, plan.priceTo)}
+                    href={getWhatsAppLink(
+                      plan.name,
+                      plan.priceFrom,
+                      plan.priceTo
+                    )}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-auto inline-flex w-full items-center justify-center rounded-2xl bg-primary px-6 py-3 font-semibold text-white transition hover:opacity-90"                  >
-                    Contact via WhatsApp
+                    className="mt-auto inline-flex w-full items-center justify-center rounded-2xl bg-primary px-6 py-3 font-semibold text-white transition hover:opacity-90"
+                  >
+                    Inquire via WhatsApp
                   </Link>
                 </div>
               ))}
-
             </div>
-
           </main>
-
         </div>
-
-      </div >
-    </div >
+      </div>
+    </div>
   );
 }

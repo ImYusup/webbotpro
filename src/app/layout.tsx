@@ -30,12 +30,12 @@ export const metadata: Metadata = {
 
   title: {
     default:
-      "WebBotPro | WhatsApp Automation, AI Solutions & Business Intelligence",
+      "WebBotPro | WhatsApp Automation, AI Solutions, Investing & Market Signal",
     template: "%s | WebBotPro",
   },
 
   description:
-    "WebBotPro helps businesses worldwide automate WhatsApp, build professional websites, AI solutions, digital marketing, e-commerce, and business intelligence dashboards.",
+    "WebBotPro helps businesses worldwide with WhatsApp Automation, AI Solutions, Website Development, Live Commerce, Business Intelligence, Market Signal, and transparent Profit Sharing Investment projects.",
 
   applicationName: "WebBotPro",
   generator: "WebBotPro Global Platform",
@@ -59,7 +59,6 @@ export const metadata: Metadata = {
   },
 
   keywords: [
-
     "WebBotPro",
 
     // Website
@@ -104,14 +103,6 @@ export const metadata: Metadata = {
     "Dashboard",
     "Analytics",
 
-    // Region
-    "Indonesia",
-    "Jakarta",
-    "Bali",
-    "Singapore",
-    "Malaysia",
-    "Global Digital Agency",
-
     // Live Commerce
     "Live Commerce",
     "E-Commerce Live Streaming",
@@ -138,6 +129,31 @@ export const metadata: Metadata = {
     "Jasa Live Streaming",
     "Live Commerce Indonesia",
 
+    // Investing & Profit Sharing (baru)
+    "Investing",
+    "Investment Project",
+    "Profit Sharing",
+    "Profit Sharing Investment",
+    "Quarterly Profit Sharing",
+    "Business Investment",
+    "Project Funding",
+    "Trading Investment",
+    "Commodities Investment",
+    "Cryptocurrency Investment",
+    "Stocks Investment",
+    "Agriculture Investment",
+    "Farming Investment",
+    "Manufacturing Investment",
+
+    // Market Signal (baru)
+    "Market Signal",
+    "WhatsApp Market Signal",
+    "Gold Market Signal",
+    "XAUUSD Signal",
+    "Crypto Market Signal",
+    "Trading Signal",
+    "Forex Signal",
+    "Market Signal Subscription",
   ],
 
   robots: {
@@ -153,9 +169,10 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: "WebBotPro | WhatsApp Automation, AI & Business Intelligence",
+    title:
+      "WebBotPro | WhatsApp Automation, AI, Investing & Market Signal",
     description:
-      "Global automation solutions including WhatsApp Automation, AI Solutions, Website Development, Live Commerce, Digital Marketing, Business Intelligence, and E-Commerce Live Streaming.",
+      "Global solutions for WhatsApp Automation, AI, Website Development, Live Commerce, Business Intelligence, Market Signal, and transparent Profit Sharing investment projects.",
     url: "https://webbotpro.com",
     siteName: "WebBotPro",
     locale: "en_US",
@@ -172,9 +189,10 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "WebBotPro | WhatsApp Automation, AI & Business Intelligence",
+    title:
+      "WebBotPro | WhatsApp Automation, AI, Investing & Market Signal",
     description:
-      "Helping businesses worldwide with WhatsApp Automation, AI Solutions, Websites, Digital Marketing and Business Intelligence.",
+      "Helping businesses worldwide with WhatsApp Automation, AI Solutions, Market Signal, Investing, and Business Intelligence.",
     images: ["/og-image.png"],
   },
 };
@@ -189,7 +207,9 @@ export default function RootLayout({
       lang="en"
       className={`${geist.variable} ${manrope.variable} antialiased`}
     >
-      <StructuredData />
+      <head>
+        <StructuredData />
+      </head>
       <body className="min-h-screen flex flex-col font-sans">
         <Header />
         <main className="flex-1">{children}</main>

@@ -13,12 +13,12 @@ export default function StructuredData() {
           url: "https://www.webbotpro.com/favicon.png",
         },
         description:
-          "WebBotPro provides website development, WhatsApp automation, AI solutions, live commerce services, digital marketing, SEO, paid advertising, and business intelligence solutions worldwide.",
+          "WebBotPro provides website development, WhatsApp automation, AI solutions, live commerce services, digital marketing, SEO, paid advertising, business intelligence, market signal, and transparent profit sharing investment projects worldwide.",
         email: "webbotproo@gmail.com",
         sameAs: [
           "https://facebook.com/webbotpro",
           "https://instagram.com/webbotpro",
-          "https://linkedin.com/company/webbotpro"
+          "https://linkedin.com/company/webbotpro",
         ],
         serviceType: [
           "Website Development",
@@ -46,8 +46,14 @@ export default function StructuredData() {
           "TikTok Shop Live",
           "Facebook Live",
           "Instagram Live",
-          "E-Commerce Live Streaming"
-        ]
+          "E-Commerce Live Streaming",
+          "Market Signal",
+          "WhatsApp Market Signal",
+          "Trading Signal",
+          "Investment Project",
+          "Profit Sharing",
+          "Profit Sharing Investment",
+        ],
       },
 
       {
@@ -56,9 +62,9 @@ export default function StructuredData() {
         url: "https://webbotpro.com",
         name: "WebBotPro",
         publisher: {
-          "@id": "https://webbotpro.com/#organization"
+          "@id": "https://webbotpro.com/#organization",
         },
-        inLanguage: "en"
+        inLanguage: "en",
       },
 
       {
@@ -71,12 +77,12 @@ export default function StructuredData() {
         areaServed: "Worldwide",
         priceRange: "$$",
         description:
-          "Professional website development, WhatsApp Business API integration, AI automation, Live Commerce, Shopee Live, TikTok Shop Live, Facebook Live, Instagram Live, SEO, digital marketing, Google Ads, Meta Ads, e-commerce development, and business intelligence services.",
+          "Professional website development, WhatsApp Business API integration, AI automation, Live Commerce, Market Signal, Profit Sharing Investment projects, SEO, digital marketing, Google Ads, Meta Ads, e-commerce development, and business intelligence services.",
         provider: {
-          "@id": "https://webbotpro.com/#organization"
-        }
-      }
-    ]
+          "@id": "https://webbotpro.com/#organization",
+        },
+      },
+    ],
   };
 
   return (
