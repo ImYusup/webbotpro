@@ -175,15 +175,15 @@ const investmentPlans = [
       "Layer chicken farming project focused on egg production with monthly profit sharing cycle.",
     features: [
       "Profit sharing 8-10%",
-      "1-month agreement",
+      "3-month agreement",
       "Egg production based returns",
       "Regular production reports",
       "Minimum investment Rp 10 million",
     ],
     note: "Best for: investors who want shorter cycle",
     agreementNote:
-      "Agreement is made every 1 month. Profit sharing is calculated above material / operational costs.",
-    agreementPeriod: "1-month agreement",
+      "Agreement is made every 3 month. Profit sharing is calculated above material / operational costs.",
+    agreementPeriod: "3-month agreement",
     profitSharing: "8-10%",
   },
   // ==================== MANUFACTURING ====================

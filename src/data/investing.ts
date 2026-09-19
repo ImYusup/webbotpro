@@ -19,10 +19,10 @@ export type InvestmentProject = {
   name: string;
   businessName: string;
   category:
-    | "Trading"
-    | "Agriculture / Farming"
-    | "Manufacturing & Creative Products"
-    | "Other Business Projects";
+  | "Trading"
+  | "Agriculture / Farming"
+  | "Manufacturing & Creative Products"
+  | "Other Business Projects";
   status: "Open for Funding" | "Funding Complete" | "In Progress" | "Completed";
   image: string;
   description: string;
@@ -90,7 +90,36 @@ export const investmentProjects: InvestmentProject[] = [
       "Market analysis and monitoring",
       "Operational and reporting costs",
     ],
-    financials: [],
+    financials: [
+      {
+        period: "Q3 2025",
+        revenue: 52000000,
+        productionCost: 0,
+        operationalCost: 12000000,
+        netProfit: 9800000,
+      },
+      {
+        period: "Q4 2025",
+        revenue: 68000000,
+        productionCost: 0,
+        operationalCost: 14500000,
+        netProfit: 13200000,
+      },
+      {
+        period: "Q1 2026",
+        revenue: 75000000,
+        productionCost: 0,
+        operationalCost: 15800000,
+        netProfit: 15100000,
+      },
+      {
+        period: "Q2 2026",
+        revenue: 82000000,
+        productionCost: 0,
+        operationalCost: 16500000,
+        netProfit: 16800000,
+      },
+    ],
     updates: [],
   },
   {
@@ -114,7 +143,37 @@ export const investmentProjects: InvestmentProject[] = [
       "Market research",
       "Operational and reporting costs",
     ],
-    financials: [],
+    // trading-stocks
+    financials: [
+      {
+        period: "Q3 2025",
+        revenue: 61000000,
+        productionCost: 0,
+        operationalCost: 13500000,
+        netProfit: 11200000,
+      },
+      {
+        period: "Q4 2025",
+        revenue: 78000000,
+        productionCost: 0,
+        operationalCost: 16200000,
+        netProfit: 14800000,
+      },
+      {
+        period: "Q1 2026",
+        revenue: 89000000,
+        productionCost: 0,
+        operationalCost: 17500000,
+        netProfit: 17200000,
+      },
+      {
+        period: "Q2 2026",
+        revenue: 95000000,
+        productionCost: 0,
+        operationalCost: 18200000,
+        netProfit: 18500000,
+      },
+    ],
     updates: [],
   },
   {
@@ -138,7 +197,37 @@ export const investmentProjects: InvestmentProject[] = [
       "Market monitoring tools",
       "Operational and reporting costs",
     ],
-    financials: [],
+    // trading-cryptocurrency
+    financials: [
+      {
+        period: "Q3 2025",
+        revenue: 48000000,
+        productionCost: 0,
+        operationalCost: 11000000,
+        netProfit: 8900000,
+      },
+      {
+        period: "Q4 2025",
+        revenue: 72000000,
+        productionCost: 0,
+        operationalCost: 14800000,
+        netProfit: 13800000,
+      },
+      {
+        period: "Q1 2026",
+        revenue: 85000000,
+        productionCost: 0,
+        operationalCost: 16000000,
+        netProfit: 16500000,
+      },
+      {
+        period: "Q2 2026",
+        revenue: 98000000,
+        productionCost: 0,
+        operationalCost: 17800000,
+        netProfit: 19200000,
+      },
+    ],
     updates: [],
   },
 
@@ -164,7 +253,30 @@ export const investmentProjects: InvestmentProject[] = [
       "Cultivation management",
       "Harvest and distribution",
     ],
-    financials: [],
+    // agriculture-rice-field
+    financials: [
+      {
+        period: "Harvest 2025 (Season 1)",
+        revenue: 95000000,
+        productionCost: 42000000,
+        operationalCost: 18000000,
+        netProfit: 28000000,
+      },
+      {
+        period: "Harvest 2025 (Season 2)",
+        revenue: 110000000,
+        productionCost: 48000000,
+        operationalCost: 19500000,
+        netProfit: 32500000,
+      },
+      {
+        period: "Harvest 2026 (Season 1)",
+        revenue: 125000000,
+        productionCost: 52000000,
+        operationalCost: 21000000,
+        netProfit: 38000000,
+      },
+    ],
     updates: [],
   },
   {
@@ -188,7 +300,37 @@ export const investmentProjects: InvestmentProject[] = [
       "Farm facilities",
       "Production monitoring",
     ],
-    financials: [],
+    // agriculture-broiler
+    financials: [
+      {
+        period: "Cycle 3 2025",
+        revenue: 48000000,
+        productionCost: 28000000,
+        operationalCost: 6500000,
+        netProfit: 9800000,
+      },
+      {
+        period: "Cycle 4 2025",
+        revenue: 55000000,
+        productionCost: 31000000,
+        operationalCost: 7200000,
+        netProfit: 11800000,
+      },
+      {
+        period: "Cycle 1 2026",
+        revenue: 62000000,
+        productionCost: 34000000,
+        operationalCost: 7800000,
+        netProfit: 14200000,
+      },
+      {
+        period: "Cycle 2 2026",
+        revenue: 68000000,
+        productionCost: 36500000,
+        operationalCost: 8500000,
+        netProfit: 16200000,
+      },
+    ],
     updates: [],
   },
   {
@@ -203,7 +345,7 @@ export const investmentProjects: InvestmentProject[] = [
     fundingTarget: 100000000,
     fundingCollected: 55000000,
     minimumInvestment: 10000000,
-    projectDuration: "1 Month",
+    projectDuration: "3 Months",
     riskLevel: "Medium",
     targetProfitSharing: "8-10%",
     useOfFunds: [
@@ -212,7 +354,37 @@ export const investmentProjects: InvestmentProject[] = [
       "Cage maintenance",
       "Egg production monitoring",
     ],
-    financials: [],
+    // agriculture-layer
+    financials: [
+      {
+        period: "Q3 2025",
+        revenue: 52000000,
+        productionCost: 27500000,
+        operationalCost: 9500000,
+        netProfit: 12000000,
+      },
+      {
+        period: "Q4 2025",
+        revenue: 61000000,
+        productionCost: 31000000,
+        operationalCost: 10800000,
+        netProfit: 15200000,
+      },
+      {
+        period: "Q1 2026",
+        revenue: 68000000,
+        productionCost: 34000000,
+        operationalCost: 11800000,
+        netProfit: 17200000,
+      },
+      {
+        period: "Q2 2026",
+        revenue: 75000000,
+        productionCost: 36500000,
+        operationalCost: 12500000,
+        netProfit: 19500000,
+      },
+    ],
     updates: [],
   },
 
@@ -238,7 +410,37 @@ export const investmentProjects: InvestmentProject[] = [
       "Production operations",
       "Packaging and delivery",
     ],
-    financials: [],
+    // manufacturing-bags-luggage
+    financials: [
+      {
+        period: "Q3 2025",
+        revenue: 78000000,
+        productionCost: 42000000,
+        operationalCost: 12500000,
+        netProfit: 18500000,
+      },
+      {
+        period: "Q4 2025",
+        revenue: 95000000,
+        productionCost: 51000000,
+        operationalCost: 14800000,
+        netProfit: 23200000,
+      },
+      {
+        period: "Q1 2026",
+        revenue: 110000000,
+        productionCost: 58000000,
+        operationalCost: 16500000,
+        netProfit: 27500000,
+      },
+      {
+        period: "Q2 2026",
+        revenue: 125000000,
+        productionCost: 65000000,
+        operationalCost: 18200000,
+        netProfit: 31800000,
+      },
+    ],
     updates: [],
   },
   {
@@ -262,7 +464,37 @@ export const investmentProjects: InvestmentProject[] = [
       "Production operations",
       "Order fulfillment",
     ],
-    financials: [],
+    // manufacturing-apparel-jersey
+    financials: [
+      {
+        period: "Q3 2025",
+        revenue: 72000000,
+        productionCost: 39000000,
+        operationalCost: 11800000,
+        netProfit: 16800000,
+      },
+      {
+        period: "Q4 2025",
+        revenue: 88000000,
+        productionCost: 47000000,
+        operationalCost: 14200000,
+        netProfit: 21800000,
+      },
+      {
+        period: "Q1 2026",
+        revenue: 105000000,
+        productionCost: 55000000,
+        operationalCost: 15800000,
+        netProfit: 26200000,
+      },
+      {
+        period: "Q2 2026",
+        revenue: 118000000,
+        productionCost: 61000000,
+        operationalCost: 17200000,
+        netProfit: 29800000,
+      },
+    ],
     updates: [],
   },
   {
@@ -286,7 +518,37 @@ export const investmentProjects: InvestmentProject[] = [
       "Order processing",
       "Packaging and shipping",
     ],
-    financials: [],
+    // manufacturing-custom-merchandise
+    financials: [
+      {
+        period: "Q3 2025",
+        revenue: 55000000,
+        productionCost: 30000000,
+        operationalCost: 9500000,
+        netProfit: 12500000,
+      },
+      {
+        period: "Q4 2025",
+        revenue: 68000000,
+        productionCost: 36000000,
+        operationalCost: 11200000,
+        netProfit: 15800000,
+      },
+      {
+        period: "Q1 2026",
+        revenue: 82000000,
+        productionCost: 43000000,
+        operationalCost: 13000000,
+        netProfit: 19500000,
+      },
+      {
+        period: "Q2 2026",
+        revenue: 95000000,
+        productionCost: 49000000,
+        operationalCost: 14500000,
+        netProfit: 23000000,
+      },
+    ],
     updates: [],
   },
 
@@ -312,7 +574,37 @@ export const investmentProjects: InvestmentProject[] = [
       "Transportation",
       "Project monitoring",
     ],
-    financials: [],
+    // other-construction-labor
+    financials: [
+      {
+        period: "Project Batch A 2025",
+        revenue: 65000000,
+        productionCost: 38000000,
+        operationalCost: 9500000,
+        netProfit: 13500000,
+      },
+      {
+        period: "Project Batch B 2025",
+        revenue: 78000000,
+        productionCost: 45000000,
+        operationalCost: 11000000,
+        netProfit: 16500000,
+      },
+      {
+        period: "Project Batch A 2026",
+        revenue: 88000000,
+        productionCost: 50000000,
+        operationalCost: 12500000,
+        netProfit: 19500000,
+      },
+      {
+        period: "Project Batch B 2026",
+        revenue: 95000000,
+        productionCost: 54000000,
+        operationalCost: 13800000,
+        netProfit: 21200000,
+      },
+    ],
     updates: [],
   },
   {
@@ -336,7 +628,30 @@ export const investmentProjects: InvestmentProject[] = [
       "Delivery and logistics",
       "Project administration",
     ],
-    financials: [],
+    // other-tender-procurement
+    financials: [
+      {
+        period: "Tender Package 3 2025",
+        revenue: 92000000,
+        productionCost: 58000000,
+        operationalCost: 12500000,
+        netProfit: 16500000,
+      },
+      {
+        period: "Tender Package 1 2026",
+        revenue: 105000000,
+        productionCost: 65000000,
+        operationalCost: 14200000,
+        netProfit: 19800000,
+      },
+      {
+        period: "Tender Package 2 2026",
+        revenue: 118000000,
+        productionCost: 72000000,
+        operationalCost: 15500000,
+        netProfit: 22500000,
+      },
+    ],
     updates: [],
   },
   {
@@ -360,7 +675,37 @@ export const investmentProjects: InvestmentProject[] = [
       "Subcontractor fees",
       "Project documentation",
     ],
-    financials: [],
+    // other-renovation-interior
+    financials: [
+      {
+        period: "Q3 2025",
+        revenue: 48000000,
+        productionCost: 22000000,
+        operationalCost: 8500000,
+        netProfit: 14500000,
+      },
+      {
+        period: "Q4 2025",
+        revenue: 62000000,
+        productionCost: 28000000,
+        operationalCost: 10500000,
+        netProfit: 18500000,
+      },
+      {
+        period: "Q1 2026",
+        revenue: 55000000,
+        productionCost: 25000000,
+        operationalCost: 9200000,
+        netProfit: 16800000,
+      },
+      {
+        period: "Q2 2026",
+        revenue: 71000000,
+        productionCost: 32000000,
+        operationalCost: 11800000,
+        netProfit: 21200000,
+      },
+    ],
     updates: [],
   },
 ];
