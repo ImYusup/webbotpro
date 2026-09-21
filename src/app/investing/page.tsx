@@ -2,7 +2,8 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
 import {
   BarChart,
   Bar,
@@ -30,7 +31,7 @@ const categoryPerformance = [
     fundingCollected: 245000000,
     revenue: 580000000,
     netProfit: 113000000,
-    performance: 19.5,          // ranking #1
+    performance: 19.5,
   },
   {
     id: "agriculture",
@@ -39,7 +40,7 @@ const categoryPerformance = [
     fundingCollected: 230000000,
     revenue: 510000000,
     netProfit: 91000000,
-    performance: 17.8,          // ranking #2
+    performance: 17.8,
   },
   {
     id: "manufacturing",
@@ -48,7 +49,7 @@ const categoryPerformance = [
     fundingCollected: 280000000,
     revenue: 720000000,
     netProfit: 116000000,
-    performance: 16.1,          // ranking #3
+    performance: 16.1,
   },
   {
     id: "other",
@@ -57,7 +58,7 @@ const categoryPerformance = [
     fundingCollected: 195000000,
     revenue: 430000000,
     netProfit: 61000000,
-    performance: 14.2,          // ranking #4
+    performance: 14.2,
   },
 ];
 
@@ -73,122 +74,117 @@ const investmentPlans = [
   // ==================== TRADING ====================
   {
     id: "trading",
+    projectId: "trading-commodities",
     name: "📦 Commodities",
     priceFrom: "Min. Rp 5.000.000",
     description:
       "Professionally managed commodities trading project with transparent performance reports every period.",
     features: [
-      "Profit sharing 8–10%",
+      "Profit sharing 40% Investor : 60% Operator",
       "Quarterly agreement",
       "Regular performance reports",
       "Active risk management",
       "Minimum investment Rp 5 million",
     ],
     note: "Best for: investors ready for higher risk",
-    agreementNote:
-      "Agreement is made per quarter. Profit sharing is calculated above material / operational costs.",
     agreementPeriod: "Quarterly agreement",
-    profitSharing: "8-10%",
+    profitSharing: "40% Investor : 60% Operator",
   },
   {
     id: "trading",
+    projectId: "trading-stocks",
     name: "📈 Stocks",
     priceFrom: "Min. Rp 8.000.000",
     description:
       "Equity trading project focused on selected stocks with structured risk management and reporting.",
     features: [
-      "Profit sharing 8–10%",
+      "Profit sharing 40% Investor : 60% Operator",
       "Quarterly agreement",
       "Regular performance reports",
       "Active risk management",
       "Minimum investment Rp 8 million",
     ],
     note: "Best for: investors seeking equity exposure",
-    agreementNote:
-      "Agreement is made per quarter. Profit sharing is calculated above material / operational costs.",
     agreementPeriod: "Quarterly agreement",
-    profitSharing: "8-10%",
+    profitSharing: "40% Investor : 60% Operator",
   },
   {
     id: "trading",
+    projectId: "trading-cryptocurrency",
     name: "₿ Cryptocurrency",
     priceFrom: "Min. Rp 10.000.000",
     description:
       "Managed cryptocurrency trading project focused on selected digital assets with clear risk controls.",
     features: [
-      "Profit sharing 8–10%",
+      "Profit sharing 40% Investor : 60% Operator",
       "Quarterly agreement",
       "Regular performance reports",
       "Active risk management",
       "Minimum investment Rp 10 million",
     ],
     note: "Best for: investors comfortable with crypto volatility",
-    agreementNote:
-      "Agreement is made per quarter. Profit sharing is calculated above material / operational costs.",
     agreementPeriod: "Quarterly agreement",
-    profitSharing: "8-10%",
+    profitSharing: "40% Investor : 60% Operator",
   },
   // ==================== AGRICULTURE ====================
   {
     id: "agriculture",
+    projectId: "agriculture-rice-field",
     name: "🌾 Rice Field (Sawah)",
     priceFrom: "Min. Rp 23.000.000",
     description:
       "Rice field farming project with profit sharing based on harvest results. Suitable for medium-term investment.",
     features: [
-      "Profit sharing 25-30%",
+      "Profit sharing 40% Investor : 60% Operator",
       "6-month agreement",
       "Harvest-based returns",
       "Land & cultivation management",
       "Minimum investment Rp 23 million",
     ],
     note: "Best for: investors who prefer agricultural assets",
-    agreementNote:
-      "Agreement is made every 6 months. Profit sharing is calculated above material / operational costs.",
     agreementPeriod: "6-month agreement",
-    profitSharing: "25-30%",
+    profitSharing: "40% Investor : 60% Operator",
   },
   {
     id: "agriculture",
+    projectId: "agriculture-broiler",
     name: "🍗 Broiler Chicken/Duck (Ayam/Bebek Daging)",
     priceFrom: "Min. Rp 10.000.000",
     description:
       "Meat chicken and duck farming project with profit sharing based on livestock sales cycle.",
     features: [
-      "Profit sharing 10-15%",
+      "Profit sharing 40% Investor : 60% Operator",
       "3-month agreement",
       "Livestock sales based returns",
       "Production monitoring",
       "Minimum investment Rp 10 million",
     ],
     note: "Best for: investors interested in livestock",
-    agreementNote:
-      "Agreement is made every 3 months. Profit sharing is calculated above material / operational costs.",
     agreementPeriod: "3-month agreement",
-    profitSharing: "10-15%",
+    profitSharing: "40% Investor : 60% Operator",
   },
   {
     id: "agriculture",
+    projectId: "agriculture-layer",
     name: "🥚 Layer Chicken (Ayam Petelur)",
     priceFrom: "Min. Rp 10.000.000",
     description:
       "Layer chicken farming project focused on egg production with monthly profit sharing cycle.",
     features: [
-      "Profit sharing 8-10%",
+      "Profit sharing 40% Investor : 60% Operator",
       "3-month agreement",
       "Egg production based returns",
       "Regular production reports",
       "Minimum investment Rp 10 million",
     ],
     note: "Best for: investors who want shorter cycle",
-    agreementNote:
-      "Agreement is made every 3 month. Profit sharing is calculated above material / operational costs.",
     agreementPeriod: "3-month agreement",
-    profitSharing: "8-10%",
+    profitSharing: "40% Investor : 60% Operator",
   },
   // ==================== MANUFACTURING ====================
   {
     id: "manufacturing",
+    projectId: "manufacturing-bags-luggage",
     name: "👜 Bags & Luggage (Tas & Koper)",
     priceFrom: "Min. Rp 20.000.000",
     description:
@@ -203,13 +199,12 @@ const investmentPlans = [
       "Public transparency dashboard",
     ],
     note: "Best for: partners who want to support bags and luggage manufacturing.",
-    agreementNote:
-      "Profit sharing is calculated from verified net profit per piece or order after deducting agreed material and production costs. The 40% investor share is distributed among participating investors according to their agreed participation. Profit is not fixed or guaranteed.",
     agreementPeriod: "Per-piece or per-order production agreement",
     profitSharing: "40% Investor : 60% Operator",
   },
   {
     id: "manufacturing",
+    projectId: "manufacturing-apparel-jersey",
     name: "👕 Apparel & Jersey (Kaos & Jersey)",
     priceFrom: "Min. Rp 20.000.000",
     description:
@@ -224,13 +219,12 @@ const investmentPlans = [
       "Public transparency dashboard",
     ],
     note: "Best for: partners interested in apparel and jersey production.",
-    agreementNote:
-      "Profit sharing is based on verified net profit from completed production orders after agreed material and operational costs. The 40% investor share is distributed among participating investors according to their agreed participation. Profit is not fixed or guaranteed.",
     agreementPeriod: "Per-piece or per-order production agreement",
     profitSharing: "40% Investor : 60% Operator",
   },
   {
     id: "manufacturing",
+    projectId: "manufacturing-custom-merchandise",
     name: "🎁 Custom Merchandise (Print on Demand)",
     priceFrom: "Min. Rp 20.000.000",
     description:
@@ -245,76 +239,93 @@ const investmentPlans = [
       "Public transparency dashboard",
     ],
     note: "Best for: partners who prefer flexible, order-based manufacturing projects.",
-    agreementNote:
-      "Profit sharing is calculated from verified net profit per order after deducting agreed material, production, and operational costs. The 40% investor share is distributed among participating investors according to their agreed participation. Results depend on actual customer orders and business performance. Profit is not fixed or guaranteed.",
     agreementPeriod: "Per-order production agreement",
     profitSharing: "40% Investor : 60% Operator",
   },
-  // ==================== OTHER BUSINESS PROJECTS ====================
+  // ==================== OTHER ====================
   {
     id: "other",
+    projectId: "other-construction-labor",
     name: "🏗️ Construction Labor Projects",
     priceFrom: "Min. Rp 10.000.000",
     description:
       "Project-based funding for construction labor teams working on residential, commercial, and renovation projects with confirmed work orders.",
     features: [
-      "Project-based profit sharing",
-      "Confirmed work order",
-      "Labor and operational funding",
+      "Profit sharing 40% Investor : 60% Operator",
+      "Distributed proportionally based on capital share",
+      "Based on verified project profit",
       "Milestone-based monitoring",
-      "Regular progress reports",
-      "Minimum investment Rp 10 million",
+      "Minimum investment according to project",
+
     ],
     note: "Best for: partners interested in construction and renovation projects.",
-    agreementNote:
-      "Profit sharing is calculated from verified project profit after deducting agreed labor, material, transportation, and operational costs. Results depend on project completion and are not fixed or guaranteed.",
     agreementPeriod: "Per-project agreement",
-    profitSharing: "Based on verified project profit",
+    profitSharing: "40% Investor : 60% Operator",
   },
   {
     id: "other",
+    projectId: "other-tender-procurement",
     name: "📋 Tender & Procurement Projects",
     priceFrom: "Min. Rp 15.000.000",
     description:
       "Funding opportunity for selected tender and procurement projects involving goods, services, equipment, or operational supplies.",
     features: [
-      "Project-based profit sharing",
-      "Selected tender opportunities",
-      "Purchase order monitoring",
-      "Procurement and working capital",
-      "Delivery progress tracking",
-      "Minimum investment Rp 15 million",
+      "Profit sharing 40% Investor : 60% Operator",
+      "Distributed proportionally based on capital share",
+      "Based on verified project profit",
+      "Milestone-based monitoring",
+      "Minimum investment according to project",
+
     ],
     note: "Best for: partners who understand tender and procurement business risks.",
-    agreementNote:
-      "Funding is allocated only to an approved project supported by documented scope, purchase order, or work agreement. Profit sharing is calculated from verified net profit after agreed project expenses. Payment depends on project execution and client settlement.",
     agreementPeriod: "Per-tender or per-procurement agreement",
-    profitSharing: "Based on verified project profit",
+    profitSharing: "40% Investor : 60% Operator",
   },
   {
     id: "other",
+    projectId: "other-renovation-interior",
     name: "🛠️ Renovation & Interior Projects",
     priceFrom: "Min. Rp 20.000.000",
     description:
       "Project funding for home renovation, office refurbishment, interior work, and small-scale commercial improvement projects.",
     features: [
-      "Project-based profit sharing",
-      "Residential and commercial projects",
-      "Labor and material funding",
-      "Budget and milestone monitoring",
-      "Project documentation",
-      "Minimum investment Rp 20 million",
+      "Profit sharing 40% Investor : 60% Operator",
+      "Distributed proportionally based on capital share",
+      "Based on verified project profit",
+      "Milestone-based monitoring",
+      "Minimum investment according to project",
+
     ],
     note: "Best for: partners interested in property improvement projects.",
-    agreementNote:
-      "Profit sharing is based on verified project profit after deducting agreed material, labor, transportation, subcontractor, and operational costs. Results depend on the approved budget, project timeline, and client payment.",
     agreementPeriod: "Per-renovation project agreement",
-    profitSharing: "Based on verified project profit",
+    profitSharing: "40% Investor : 60% Operator",
   },
 ];
 
 export default function InvestingPage() {
-  const [activeCategory, setActiveCategory] = useState("all");
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const categoryFromUrl = searchParams.get("category");
+
+  const [activeCategory, setActiveCategory] = useState(
+    categoryFromUrl || "all"
+  );
+
+  const [expandedCategories, setExpandedCategories] = useState<string[]>([
+    "trading",
+    "agriculture",
+    "manufacturing",
+    "other",
+  ]);
+
+  // Sync state dengan URL
+  useEffect(() => {
+    if (categoryFromUrl) {
+      setActiveCategory(categoryFromUrl);
+    } else {
+      setActiveCategory("all");
+    }
+  }, [categoryFromUrl]);
 
   const filteredPlans =
     activeCategory === "all"
@@ -327,11 +338,34 @@ export default function InvestingPage() {
       : investmentCategories.find((c) => c.id === activeCategory)?.name ||
       "Investing";
 
+  const handleCategoryClick = (categoryId: string) => {
+    setActiveCategory(categoryId);
+
+    if (categoryId === "all") {
+      router.push("/investing");
+    } else {
+      router.push(`/investing?category=${categoryId}`);
+    }
+
+    // Auto expand kategori yang diklik
+    if (categoryId !== "all" && !expandedCategories.includes(categoryId)) {
+      setExpandedCategories((prev) => [...prev, categoryId]);
+    }
+  };
+
+  const toggleCategory = (categoryId: string) => {
+    setExpandedCategories((prev) =>
+      prev.includes(categoryId)
+        ? prev.filter((id) => id !== categoryId)
+        : [...prev, categoryId]
+    );
+  };
+
   const getWhatsAppLink = (
     planName: string,
     priceFrom: string,
     agreementPeriod: string = "Quarterly agreement",
-    profitSharing: string = "8-10%"
+    profitSharing: string = "40% Investor : 60% Operator",
   ) => {
     const cleanName = planName
       .replace(/[\u{1F300}-\u{1F9FF}]/gu, "")
@@ -368,31 +402,84 @@ export default function InvestingPage() {
             {currentTitle}
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Join real projects with transparent profit sharing.
-            Agreement periods and profit shares differ by category based on actual project results.
+            Join real projects with transparent profit sharing. Agreement
+            periods and profit shares differ by category based on actual project
+            results.
           </p>
         </div>
 
         <div className="flex flex-col lg:flex-row gap-10">
-          {/* Sidebar */}
+          {/* Sidebar - Nested */}
           <aside className="lg:w-72 shrink-0">
-            <div className="sticky top-24 rounded-3xl border bg-white p-8 shadow-sm">
-              <h2 className="mb-6 text-2xl font-bold text-gray-900">
+            <div className="sticky top-24 rounded-3xl border bg-white p-6 shadow-sm">
+              <h2 className="mb-5 text-2xl font-bold text-gray-900">
                 Categories
               </h2>
-              <nav className="flex flex-col gap-3">
-                {investmentCategories.map((item) => (
-                  <button
-                    key={item.id}
-                    onClick={() => setActiveCategory(item.id)}
-                    className={`rounded-2xl px-6 py-3.5 text-left font-semibold transition ${activeCategory === item.id
-                      ? "bg-teal-600 text-white"
-                      : "text-gray-700 hover:bg-gray-100"
-                      }`}
-                  >
-                    {item.name}
-                  </button>
-                ))}
+
+              <nav className="flex flex-col gap-1">
+                {/* All Opportunities */}
+                <button
+                  onClick={() => handleCategoryClick("all")}
+                  className={`rounded-xl px-4 py-3 text-left font-semibold transition ${activeCategory === "all"
+                    ? "bg-teal-600 text-white"
+                    : "text-gray-700 hover:bg-gray-100"
+                    }`}
+                >
+                  All Opportunities
+                </button>
+
+                {/* Nested Categories */}
+                {investmentCategories
+                  .filter((cat) => cat.id !== "all")
+                  .map((category) => {
+                    const isExpanded = expandedCategories.includes(category.id);
+                    const isActive = activeCategory === category.id;
+                    const projects = investmentPlans.filter(
+                      (p) => p.id === category.id
+                    );
+
+                    return (
+                      <div key={category.id} className="mt-1">
+                        {/* Category Header */}
+                        <button
+                          onClick={() => handleCategoryClick(category.id)}
+                          className={`flex w-full items-center justify-between rounded-xl px-4 py-3 text-left font-semibold transition ${isActive
+                            ? "bg-teal-600 text-white"
+                            : "text-gray-700 hover:bg-gray-100"
+                            }`}
+                        >
+                          <span>{category.name}</span>
+                          <span
+                            className={`text-sm transition-transform ${isExpanded ? "rotate-180" : ""
+                              }`}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              toggleCategory(category.id);
+                            }}
+                          >
+                            ▾
+                          </span>
+                        </button>
+
+                        {/* Nested Projects */}
+                        {isExpanded && (
+                          <div className="ml-3 mt-1 space-y-1 border-l-2 border-gray-200 pl-3">
+                            {projects.map((project) => (
+                              <Link
+                                key={project.projectId}
+                                href={`/investing/${project.projectId}`}
+                                className="block rounded-lg px-3 py-2 text-sm font-semibold text-gray-800 transition hover:bg-gray-100 hover:text-teal-700"
+                              >
+                                {project.name
+                                  .replace(/[\u{1F300}-\u{1F9FF}]/gu, "")
+                                  .trim()}
+                              </Link>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
               </nav>
             </div>
           </aside>
@@ -418,7 +505,8 @@ export default function InvestingPage() {
                     <p className="mt-2 text-xl font-bold text-teal-600">
                       {formatRupiah(
                         categoryPerformance.reduce(
-                          (total, category) => total + category.fundingCollected,
+                          (total, category) =>
+                            total + category.fundingCollected,
                           0
                         )
                       )}
@@ -541,48 +629,46 @@ export default function InvestingPage() {
                     key={`${plan.id}-${index}`}
                     className="flex h-full flex-col rounded-3xl border bg-white p-7 shadow-lg transition-all hover:shadow-xl"
                   >
-                    {/* Title */}
-                    <h3 className="text-xl font-bold text-gray-900 leading-snug mb-2">
-                      {plan.name}
-                    </h3>
+                    <Link href={`/investing/${plan.projectId}`}>
+                      <h3 className="text-xl font-bold text-gray-900 leading-snug mb-2 hover:text-teal-600 transition">
+                        {plan.name}
+                      </h3>
+                    </Link>
 
-                    {/* Price */}
                     <p className="text-teal-600 font-semibold text-[15px] mb-4">
                       {plan.priceFrom}
                     </p>
 
-                    {/* Description */}
                     <p className="text-gray-600 text-sm leading-relaxed mb-5">
                       {plan.description}
                     </p>
 
-                    {/* Features */}
                     <ul className="space-y-2.5 mb-5 flex-1">
                       {plan.features.map((feature, i) => (
                         <li
                           key={i}
                           className="flex items-start gap-2.5 text-sm text-gray-700"
                         >
-                          <span className="mt-0.5 text-teal-500 font-bold">✓</span>
+                          <span className="mt-0.5 text-teal-500 font-bold">
+                            ✓
+                          </span>
                           <span>{feature}</span>
                         </li>
                       ))}
                     </ul>
 
-                    {/* Note (Best for) - warna orange */}
                     {plan.note && (
                       <p className="text-sm font-medium text-orange-500 mb-6">
                         {plan.note}
                       </p>
                     )}
 
-                    {/* WhatsApp Button */}
                     <a
                       href={getWhatsAppLink(
                         plan.name,
                         plan.priceFrom,
                         plan.agreementPeriod || "Quarterly agreement",
-                        plan.profitSharing || "8-10%"
+                        plan.profitSharing || "40% Investor : 60% Operator",
                       )}
                       target="_blank"
                       rel="noopener noreferrer"

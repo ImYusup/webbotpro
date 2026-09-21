@@ -83,7 +83,7 @@ export const investmentProjects: InvestmentProject[] = [
     minimumInvestment: 5000000,
     projectDuration: "Quarterly",
     riskLevel: "High",
-    targetProfitSharing: "8-10%",
+    targetProfitSharing: "40% Investor : 60% Operator",
     useOfFunds: [
       "Trading capital allocation",
       "Risk management reserve",
@@ -136,7 +136,7 @@ export const investmentProjects: InvestmentProject[] = [
     minimumInvestment: 8000000,
     projectDuration: "Quarterly",
     riskLevel: "High",
-    targetProfitSharing: "8-10%",
+    targetProfitSharing: "40% Investor : 60% Operator",
     useOfFunds: [
       "Equity trading capital",
       "Risk management reserve",
@@ -190,7 +190,7 @@ export const investmentProjects: InvestmentProject[] = [
     minimumInvestment: 10000000,
     projectDuration: "Quarterly",
     riskLevel: "High",
-    targetProfitSharing: "8-10%",
+    targetProfitSharing: "40% Investor : 60% Operator",
     useOfFunds: [
       "Crypto trading capital",
       "Risk management reserve",
@@ -246,7 +246,7 @@ export const investmentProjects: InvestmentProject[] = [
     minimumInvestment: 23000000,
     projectDuration: "6 Months",
     riskLevel: "Medium",
-    targetProfitSharing: "25-30%",
+    targetProfitSharing: "40% Investor : 60% Operator",
     useOfFunds: [
       "Land preparation",
       "Seeds and fertilizers",
@@ -293,7 +293,7 @@ export const investmentProjects: InvestmentProject[] = [
     minimumInvestment: 10000000,
     projectDuration: "3 Months",
     riskLevel: "Medium",
-    targetProfitSharing: "10-15%",
+    targetProfitSharing: "40% Investor : 60% Operator",
     useOfFunds: [
       "Livestock purchase",
       "Feed and medicine",
@@ -347,7 +347,7 @@ export const investmentProjects: InvestmentProject[] = [
     minimumInvestment: 10000000,
     projectDuration: "3 Months",
     riskLevel: "Medium",
-    targetProfitSharing: "8-10%",
+    targetProfitSharing: "40% Investor : 60% Operator",
     useOfFunds: [
       "Layer chicken stock",
       "Feed and supplements",
@@ -567,7 +567,7 @@ export const investmentProjects: InvestmentProject[] = [
     minimumInvestment: 10000000,
     projectDuration: "Per Project",
     riskLevel: "Medium",
-    targetProfitSharing: "Based on verified project profit",
+    targetProfitSharing: "40% Investor : 60% Operator",
     useOfFunds: [
       "Labor funding",
       "Operational costs",
@@ -621,7 +621,7 @@ export const investmentProjects: InvestmentProject[] = [
     minimumInvestment: 15000000,
     projectDuration: "Per Tender",
     riskLevel: "Medium",
-    targetProfitSharing: "Based on verified project profit",
+    targetProfitSharing: "40% Investor : 60% Operator",
     useOfFunds: [
       "Working capital",
       "Procurement of goods/services",
@@ -668,7 +668,7 @@ export const investmentProjects: InvestmentProject[] = [
     minimumInvestment: 20000000,
     projectDuration: "Per Project",
     riskLevel: "Medium",
-    targetProfitSharing: "Based on verified project profit",
+    targetProfitSharing: "40% Investor : 60% Operator",
     useOfFunds: [
       "Material costs",
       "Labor costs",
