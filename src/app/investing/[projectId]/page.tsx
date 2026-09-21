@@ -149,8 +149,8 @@ export default async function InvestingProjectPage({ params }: Props) {
                     <Link
                       href={`/investing?category=${category.id}`}
                       className={`block rounded-xl px-4 py-3 font-semibold transition ${currentCategoryId === category.id
-                          ? "text-teal-700"
-                          : "text-gray-800 hover:bg-gray-100"
+                        ? "text-teal-700"
+                        : "text-gray-800 hover:bg-gray-100"
                         }`}
                     >
                       {category.name}
@@ -165,8 +165,8 @@ export default async function InvestingProjectPage({ params }: Props) {
                             key={p.id}
                             href={`/investing/${p.id}`}
                             className={`block rounded-lg px-3 py-2 text-sm font-semibold transition ${isActive
-                                ? "bg-teal-600 text-white"
-                                : "text-gray-800 hover:bg-gray-100 hover:text-teal-700"
+                              ? "bg-teal-600 text-white"
+                              : "text-gray-800 hover:bg-gray-100 hover:text-teal-700"
                               }`}
                           >
                             {p.name}
@@ -414,8 +414,8 @@ export default async function InvestingProjectPage({ params }: Props) {
               </h2>
               <p className="mt-3 max-w-2xl leading-7 text-teal-50">
                 Contact our team via WhatsApp for the project overview,
-                quarterly agreement, documentation, and next steps. Profit
-                sharing 8–10% above material costs.
+                agreement details, documentation, and next steps. Profit
+                sharing 40% Investor : 60% Operator (distributed proportionally).
               </p>
               <a
                 href={`https://wa.me/6285975149508?text=${encodeURIComponent(
@@ -428,9 +428,9 @@ export default async function InvestingProjectPage({ params }: Props) {
                     `Business: ${project.businessName}`,
                     "",
                     "Note:",
-                    "- Quarterly agreement",
-                    "- Profit sharing 8–10%",
-                    "- Calculated above material / operational costs",
+                    `- ${project.projectDuration} agreement`,
+                    "- Profit sharing 40% Investor : 60% Operator",
+                    "- Distributed proportionally based on capital share",
                     "",
                     "Could you please provide more details and next steps?",
                     "",
