@@ -2,7 +2,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import {
   BarChart,
@@ -84,7 +84,7 @@ const investmentPlans = [
       "Quarterly agreement",
       "Regular performance reports",
       "Active risk management",
-      "Minimum investment Rp 5 million",
+      "Minimum investment Rp 5–10 million",
     ],
     note: "Best for: investors ready for higher risk",
     agreementPeriod: "Quarterly agreement",
@@ -102,7 +102,7 @@ const investmentPlans = [
       "Quarterly agreement",
       "Regular performance reports",
       "Active risk management",
-      "Minimum investment Rp 8 million",
+      "Minimum investment Rp 5–10 million",
     ],
     note: "Best for: investors seeking equity exposure",
     agreementPeriod: "Quarterly agreement",
@@ -120,7 +120,7 @@ const investmentPlans = [
       "Quarterly agreement",
       "Regular performance reports",
       "Active risk management",
-      "Minimum investment Rp 10 million",
+      "Minimum investment Rp 5–10 million",
     ],
     note: "Best for: investors comfortable with crypto volatility",
     agreementPeriod: "Quarterly agreement",
@@ -139,7 +139,7 @@ const investmentPlans = [
       "6-month agreement",
       "Harvest-based returns",
       "Land & cultivation management",
-      "Minimum investment Rp 23 million",
+      "Minimum investment according to project",
     ],
     note: "Best for: investors who prefer agricultural assets",
     agreementPeriod: "6-month agreement",
@@ -157,7 +157,7 @@ const investmentPlans = [
       "3-month agreement",
       "Livestock sales based returns",
       "Production monitoring",
-      "Minimum investment Rp 10 million",
+      "Minimum investment according to project",
     ],
     note: "Best for: investors interested in livestock",
     agreementPeriod: "3-month agreement",
@@ -175,7 +175,7 @@ const investmentPlans = [
       "3-month agreement",
       "Egg production based returns",
       "Regular production reports",
-      "Minimum investment Rp 10 million",
+      "Minimum investment according to project",
     ],
     note: "Best for: investors who want shorter cycle",
     agreementPeriod: "3-month agreement",
@@ -302,7 +302,7 @@ const investmentPlans = [
   },
 ];
 
-export default function InvestingPage() {
+function InvestingContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const categoryFromUrl = searchParams.get("category");
@@ -692,5 +692,17 @@ export default function InvestingPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function InvestingPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <p className="text-gray-500">Loading...</p>
+      </div>
+    }>
+      <InvestingContent />
+    </Suspense>
   );
 }
