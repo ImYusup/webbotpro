@@ -192,7 +192,7 @@ const investmentPlans = [
     features: [
       "Minimum investment: Rp 20 million",
       "Profit sharing: 40% Investor : 60% Operator",
-      "Per-piece or per-order sharing model",
+      "Quarterly agreement",
       "Bags, luggage, and pouch production",
       "Production and sales monitoring",
       "Regular project performance reports",
@@ -212,7 +212,7 @@ const investmentPlans = [
     features: [
       "Minimum investment: Rp 20 million",
       "Profit sharing: 40% Investor : 60% Operator",
-      "Per-piece or per-order sharing model",
+      "Quarterly agreement",
       "Apparel, jersey, hoodie, and uniform production",
       "Suitable for team, school, community, and event orders",
       "Regular production and sales reports",
@@ -232,7 +232,7 @@ const investmentPlans = [
     features: [
       "Minimum investment: Rp 20 million",
       "Profit sharing: 40% Investor : 60% Operator",
-      "Per-piece or per-order sharing model",
+      "Quarterly agreement",
       "Custom and event-based production",
       "Flexible production cycle",
       "Order, material, and sales monitoring",
